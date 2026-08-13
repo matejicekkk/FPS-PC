@@ -16,12 +16,12 @@
         body {
             display: flex;
             flex-direction: column;
-            /* Obrázek je bezpečně zakódován přímo do CSS, nikde se neblokuje */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="1920" height="1080" viewBox="0 0 1920 1080"><rect width="1920" height="1080" fill="%230f1115"/><circle cx="300" cy="800" r="600" fill="%230066ff" opacity="0.15" filter="blur(80px)"/><circle cx="1600" cy="200" r="500" fill="%2300ff66" opacity="0.1" filter="blur(80px)"/><path d="M0 200 L400 600 L800 300 L1200 700 L1600 400 L1920 600" stroke="%231e293b" stroke-width="4" fill="none" opacity="0.3"/><path d="M0 400 L500 200 L1000 600 L1400 300 L1920 700" stroke="%231e293b" stroke-width="2" fill="none" opacity="0.2"/></svg>');
+            /* Tento kód si teď vezme tvou fotku image.png přímo z tvého GitHubu */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), url('image.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            
+            background-color: #1a1a1a;
         }
 
         header {
@@ -79,25 +79,23 @@
         }
 
         .glass-panel {
-            background-color: rgba(255, 255, 255, 0.96);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
             max-width: 1150px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         h1 {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 800;
             margin: 0 0 5px 0;
             text-align: center;
             color: #0f172a;
-            letter-spacing: -0.5px;
         }
         h1 span { color: #0066ff; }
         
@@ -119,7 +117,7 @@
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 35px 10px;
+            padding: 30px 10px;
             text-decoration: none;
             color: inherit;
             display: flex;
@@ -127,7 +125,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
             aspect-ratio: 1 / 1;
         }
@@ -135,14 +133,14 @@
         .category-box:hover {
             border-color: #0066ff;
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.18);
+            box-shadow: 0 12px 24px rgba(0, 102, 255, 0.15);
         }
 
         .category-name {
             font-size: 16px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .category-price {
@@ -150,7 +148,7 @@
             font-weight: 800;
             color: #0066ff;
             background-color: #f0f6ff;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 6px;
             white-space: nowrap;
         }
@@ -200,6 +198,7 @@
 
 </body>
 </html>
+
 
 
 

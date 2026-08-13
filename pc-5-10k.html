@@ -16,13 +16,8 @@
         h2 { font-size: 28px; text-align: center; margin-bottom: 40px; }
         h2 span { color: #0066ff; }
 
-        .compare-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
+        .compare-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        /* ZMENŠENÉ BOXÍKY: Menší padding a upravený poměr stran na čistý čtverec */
         .pc-card {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
@@ -35,7 +30,7 @@
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
-            aspect-ratio: 1 / 1; /* Dokonalý menší čtverec */
+            aspect-ratio: 1 / 1;
             text-decoration: none;
             color: inherit;
             box-sizing: border-box;
@@ -47,27 +42,10 @@
         .pc-card.nvidia:hover { box-shadow: 0 10px 20px rgba(68, 187, 0, 0.15); transform: translateY(-3px); }
         .pc-card.amd:hover { box-shadow: 0 10px 20px rgba(255, 0, 0, 0.15); transform: translateY(-3px); }
 
-        .pc-img {
-            width: 100%;
-            height: 60px; /* Zmenšený prostor pro obrázek */
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pc-img img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+        .pc-img { width: 100%; height: 75px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+        .pc-img img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
 
-        .price {
-            font-size: 15px;
-            font-weight: 800;
-            padding: 5px 10px;
-            border-radius: 6px;
-            white-space: nowrap;
-        }
+        .price { font-size: 15px; font-weight: 800; padding: 5px 10px; border-radius: 6px; white-space: nowrap; }
         .pc-card.nvidia .price { color: #44bb00; background-color: #f0fbf0; }
         .pc-card.amd .price { color: #ff0000; background-color: #fff5f5; }
     </style>
@@ -83,10 +61,15 @@
     <div class="container">
         <h2>Sestavy <span>5 000 - 10 000 Kč</span></h2>
         <div class="compare-grid">
+            <!-- PRVNÍ POČÍTAČ: Tady je vložená tvoje nová fotka z chatu -->
             <a href="mailto:info@fpspc.cz?subject=Zájem o Sestavu 5-10k (NVIDIA 1)" class="pc-card nvidia">
-                <div class="pc-img"><img src="https://unsplash.com" alt="PC"></div>
+                <div class="pc-img">
+                    <img src="https://googleapis.com" alt="Tvoje Modré PC">
+                </div>
                 <span class="price">7 490 Kč</span>
             </a>
+
+            <!-- Ostatní počítače zůstávají stejné -->
             <a href="mailto:info@fpspc.cz?subject=Zájem o Sestavu 5-10k (NVIDIA 2)" class="pc-card nvidia">
                 <div class="pc-img"><img src="https://unsplash.com" alt="PC"></div>
                 <span class="price">9 890 Kč</span>

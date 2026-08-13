@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS-PC - Herní počítače s maximálním výkonem</title>
+    <style>
+        body {
+            background-color: #0d0f12;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #161a22;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00ff66;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ff66;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #00ff66;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, #161a22 0%, #0d0f12 100%);
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .hero span {
+            color: #00ff66;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #a0aec0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-size: 24px;
+            border-left: 4px solid #00ff66;
+            padding-left: 10px;
+            margin-bottom: 30px;
+        }
+        .pc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .pc-card {
+            background-color: #161a22;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #2d3748;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .pc-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff66;
+        }
+        .pc-card h3 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        .specs {
+            color: #a0aec0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        .btn-buy {
+            display: inline-block;
+            background-color: #00ff66;
+            color: #0d0f12;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            width: calc(100% - 40px);
+            text-align: center;
+        }
+        .btn-buy:hover {
+            background-color: #00cc52;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">FPS-<span>PC</span></div>
+        <nav>
+            <a href="#">Domů</a>
+            <a href="#">Nabídka PC</a>
+            <a href="#">O nás</a>
+            <a href="#">Kontakt</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Nekompromisní <span>Herní Mašiny</span></h1>
+        <p>Stavíme počítače, které ti zajistí maximální FPS v každé hře. Žádné záseky, jen čistý výkon.</p>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Naše aktuální sestavy</h2>
+        
+        <div class="pc-grid">
+            <div class="pc-card">
+                <h3>FPS-PC START</h3>
+                <p class="specs">
+                    • Procesor: Intel i5 / AMD Ryzen 5<br>
+                    • Grafika: GTX 1660 Super / RTX 3050<br>
+                    • RAM: 16GB DDR4<br>
+                    • Disk: 500GB NVMe SSD<br>
+                    • Ideální na: Fortnite, CS2, GTA V
+                </p>
+                <a href="mailto:info@fpspc.cz?subject=Mám zájem o FPS-PC START" class="btn-buy">Mám zájem</a>
+            </div>
+
+            <div class="pc-card">
+                <h3>FPS-PC PRO</h3>
+                <p class="specs">
+                    • Procesor: Intel i7 / AMD Ryzen 7<br>
+                    • Grafika: RTX 4060 Ti / RX 7700 XT<br>
+                    • RAM: 32GB DDR5<br>
+                    • Disk: 1TB NVMe SSD<br>
+                    • Ideální na: 144Hz+ hraní, Cyberpunk, Streaming
+                </p>
+                <a href="mailto:info@fpspc.cz?subject=Mám zájem o FPS-PC PRO" class="btn-buy">Mám zájem</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
 

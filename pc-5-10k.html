@@ -10,7 +10,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      background-color: #f8fafc; /* Lehký šedý podklad, aby bílé karty vynikly */
       color: #1e293b;
       font-family: 'Segoe UI', Roboto, sans-serif;
     }
@@ -76,55 +76,106 @@
       gap: 25px;
     }
 
+    /* KARTA PC */
     .pc-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 25px;
-      width: 240px;
-      height: 280px;
+      padding: 35px 20px 25px 20px; /* Větší horní padding kvůli štítku */
+      width: 250px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden; /* Skryje přesah štítku v rohu */
     }
 
     .pc-card:hover {
       transform: translateY(-5px);
     }
 
-    .pc-card.border-green {
-      border: 2px solid #22c55e;
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
-    }
-
-    .pc-card.border-red {
-      border: 2px solid #ef4444;
-      box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
-    }
-
-    .pc-card img {
-      max-width: 100%;
-      height: 140px;
-      object-fit: contain;
-    }
-
-    .pc-price-box {
-      padding: 6px 16px;
-      border-radius: 8px;
-      font-size: 18px;
+    /* ZNAČKA V ROHU (AMD / NVIDIA) */
+    .brand-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #ffffff;
       font-weight: 900;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-bottom-right-radius: 12px;
+      z-index: 10;
     }
 
+    /* NVIDIA STYL (Zelená) */
+    .pc-card.border-green {
+      border: 2px solid #7cbd27;
+      box-shadow: 0 0 15px rgba(124, 189, 39, 0.1);
+    }
+    .pc-card.border-green .brand-badge {
+      background-color: #7cbd27;
+    }
+    .pc-card.border-green:hover {
+      box-shadow: 0 8px 25px rgba(124, 189, 39, 0.25);
+    }
     .pc-card.border-green .pc-price-box {
       color: #22c55e;
       background: #f0fdf4;
     }
 
+    /* AMD STYL (Červená) */
+    .pc-card.border-red {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.1);
+    }
+    .pc-card.border-red .brand-badge {
+      background-color: #ef4444;
+    }
+    .pc-card.border-red:hover {
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
+    }
     .pc-card.border-red .pc-price-box {
       color: #ef4444;
       background: #fef2f2;
+    }
+
+    /* OBRÁZEK A TEXTY */
+    .pc-card img {
+      max-width: 100%;
+      height: 130px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+
+    .pc-info {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .pc-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+
+    .pc-specs {
+      font-size: 11px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* CENA */
+    .pc-price-box {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 900;
+      width: 100%;
     }
   </style>
 </head>
@@ -142,31 +193,49 @@
     <h1 class="category-main-title">Sestavy 5 000 - 10 000 Kč</h1>
 
     <div class="pc-grid">
-      <!-- Sestava 1 -->
+      <!-- Sestava 1 (NVIDIA) -->
       <a href="detail-pc1.html" class="pc-card border-green">
+        <div class="brand-badge">NVIDIA</div>
         <img src="pc-1.jpg" alt="Herní PC">
+        <div class="pc-info">
+          <h2 class="pc-title">FPS Starter - GTX 1650</h2>
+          <p class="pc-specs">Intel i3-10100F • 16GB RAM</p>
+        </div>
         <div class="pc-price-box">5 990 Kč</div>
       </a>
 
-      <!-- Sestava 2 -->
+      <!-- Sestava 2 (NVIDIA) -->
       <a href="detail-pc5.html" class="pc-card border-green">
+        <div class="brand-badge">NVIDIA</div>
         <img src="images.jpg" alt="Herní PC">
+        <div class="pc-info">
+          <h2 class="pc-title">FPS Basic - RTX 3050</h2>
+          <p class="pc-specs">Intel i5-10400F • 16GB RAM</p>
+        </div>
         <div class="pc-price-box">9 990 Kč</div>
       </a>
 
-      <!-- Sestava 3 -->
+      <!-- Sestava 3 (AMD) -->
       <a href="detail-pc6.html" class="pc-card border-red">
+        <div class="brand-badge">AMD</div>
         <img src="gaming-pc-idea-10-gen-rx-6600-xt.amdpc3.jpg" alt="Herní PC">
+        <div class="pc-info">
+          <h2 class="pc-title">Radeon Red - RX 580</h2>
+          <p class="pc-specs">Ryzen 5 3600 • 16GB RAM</p>
+        </div>
         <div class="pc-price-box">7 490 Kč</div>
       </a>
 
-      <!-- Sestava 4 -->
+      <!-- Sestava 4 (AMD) -->
       <a href="detail-pc7.html" class="pc-card border-red">
+        <div class="brand-badge">AMD</div>
         <img src="5-10k 4.jpg" alt="Herní PC">
+        <div class="pc-info">
+          <h2 class="pc-title">Radeon Plus - RX 6500 XT</h2>
+          <p class="pc-specs">Ryzen 5 4500 • 16GB RAM</p>
+        </div>
         <div class="pc-price-box">8 590 Kč</div>
       </a>
-
-     
     </div>
   </div>
 

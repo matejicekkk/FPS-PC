@@ -316,7 +316,7 @@
           </div>
           <div class="control-group">
             <div class="switch-label-wrapper">
-             
+              <span>Ray Tracing: <span class="value-badge" id="rt-label-fortnite">OFF</span></span>
               <label class="switch">
                 <input type="checkbox" id="rt-fortnite" onchange="recalculate('fortnite')">
                 <span class="toggle-slider"></span>
@@ -324,7 +324,7 @@
             </div>
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-fortnite">240 FPS</div>
+            <div class="fps-value" id="fps-fortnite">150 FPS</div>
           </div>
         </div>
 
@@ -341,7 +341,7 @@
           </div>
           <div class="control-group">
             <div class="switch-label-wrapper">
-             
+              <span>Ray Tracing: <span class="value-badge" id="rt-label-cs2">OFF</span></span>
               <label class="switch">
                 <input type="checkbox" id="rt-cs2" onchange="recalculate('cs2')">
                 <span class="toggle-slider"></span>
@@ -349,7 +349,7 @@
             </div>
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cs2">320 FPS</div>
+            <div class="fps-value" id="fps-cs2">200 FPS</div>
           </div>
         </div>
 
@@ -366,7 +366,7 @@
           </div>
           <div class="control-group">
             <div class="switch-label-wrapper">
-              
+              <span>Ray Tracing: <span class="value-badge" id="rt-label-valorant">OFF</span></span>
               <label class="switch">
                 <input type="checkbox" id="rt-valorant" onchange="recalculate('valorant')">
                 <span class="toggle-slider"></span>
@@ -374,7 +374,7 @@
             </div>
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-valorant">400 FPS</div>
+            <div class="fps-value" id="fps-valorant">240 FPS</div>
           </div>
         </div>
 
@@ -397,7 +397,7 @@
           </div>
           <div class="control-group">
             <div class="switch-label-wrapper">
-             
+              <span>Ray Tracing: <span class="value-badge" id="rt-label-cyberpunk">OFF</span></span>
               <label class="switch">
                 <input type="checkbox" id="rt-cyberpunk" onchange="recalculate('cyberpunk')">
                 <span class="toggle-slider"></span>
@@ -405,7 +405,7 @@
             </div>
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cyberpunk">110 FPS</div>
+            <div class="fps-value" id="fps-cyberpunk">60 FPS</div>
           </div>
         </div>
 
@@ -422,7 +422,7 @@
           </div>
           <div class="control-group">
             <div class="switch-label-wrapper">
-             
+              <span>Ray Tracing: <span class="value-badge" id="rt-label-gtav">OFF</span></span>
               <label class="switch">
                 <input type="checkbox" id="rt-gtav" onchange="recalculate('gtav')">
                 <span class="toggle-slider"></span>
@@ -430,7 +430,7 @@
             </div>
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-gtav">165 FPS</div>
+            <div class="fps-value" id="fps-gtav">120 FPS</div>
           </div>
         </div>
 
@@ -440,20 +440,18 @@
   </div>
 
   <script>
-    // Základní FPS při FHD + Low nastavení bez Ray Tracingu
+    // Realistické výchozí hodnoty pro Ryzen 5 2600 + GTX 1070 na FHD + Low
     const baseFPS = {
-      fortnite: 240,
-      cs2: 320,
-      valorant: 400,
-      cyberpunk: 110,
-      gtav: 165
+      fortnite: 150,
+      cs2: 200,
+      valorant: 240,
+      cyberpunk: 60,
+      gtav: 120
     };
 
-    // Násobiče náročnosti rozlišení: FHD (1.0), 2K (0.68), 4K (0.40)
     const resMultipliers = [1.0, 0.68, 0.40];
     const resNames = ["FHD (1080p)", "2K (1440p)", "4K (2160p)"];
 
-    // Násobiče náročnosti detailů: Low (1.0), Medium (0.82), High (0.65), Ultra (0.48)
     const detMultipliers = [1.0, 0.82, 0.65, 0.48];
     const detNames = ["Low", "Medium", "High", "Ultra"];
 
@@ -464,7 +462,7 @@
 
       let rtMultiplier = 1.0;
       if (rtCheck && rtCheck.checked) {
-        rtMultiplier = 0.55; // Zapnutý Ray Tracing sníží FPS o cca 45 %
+        rtMultiplier = 0.50; 
         document.getElementById('rt-label-' + game).innerText = "ON";
         document.getElementById('rt-label-' + game).style.color = "#0066ff";
       } else if (rtCheck) {
@@ -472,14 +470,11 @@
         document.getElementById('rt-label-' + game).style.color = "#64748b";
       }
 
-      // Změna textu nad posuvníky
       document.getElementById('res-label-' + game).innerText = resNames[resVal];
       document.getElementById('det-label-' + game).innerText = detNames[detVal];
 
-      // Výpočet reálného poklesu FPS s přihlédnutím k Ray Tracingu
       const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal] * rtMultiplier);
       
-      // Zobrazení nového čísla
       document.getElementById('fps-' + game).innerText = calculated + " FPS";
     }
   </script>

@@ -106,7 +106,6 @@
             text-align: center;
         }
 
-        /* Opravená čistá mřížka 4 sloupců vedle sebe */
         .grid-container {
             width: 100%;
             display: grid;
@@ -159,7 +158,6 @@
             white-space: nowrap;
         }
 
-        /* Schovaný panel pro detail vybraného PC */
         .pc-detail-container {
             width: 100%;
             background-color: #ffffff;
@@ -252,30 +250,28 @@
             <h1>Poctivé <span>Herní Mašiny</span></h1>
             <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
-            <!-- Opravené boxy bez starých áčkových značek -->
             <div class="grid-container">
-                <div class="category-box" onclick="showPC('kat1', this)">
+                <div class="category-box" id="btn-kat1">
                     <span class="category-name">Základní výkon</span>
                     <span class="category-price">5 000 - 10 000 Kč</span>
                 </div>
 
-                <div class="category-box" onclick="showPC('kat2', this)">
+                <div class="category-box" id="btn-kat2">
                     <span class="category-name">Dostupný gaming</span>
                     <span class="category-price">10 000 - 15 000 Kč</span>
                 </div>
 
-                <div class="category-box" onclick="showPC('kat3', this)">
+                <div class="category-box" id="btn-kat3">
                     <span class="category-name">Pokročilý výkon</span>
                     <span class="category-price">15 000 - 25 000 Kč</span>
                 </div>
 
-                <div class="category-box" onclick="showPC('kat4', this)">
+                <div class="category-box" id="btn-kat4">
                     <span class="category-name">High-end mašiny</span>
                     <span class="category-price">25 000 - 35 000 Kč</span>
                 </div>
             </div>
 
-            <!-- Panel pro zobrazení detailu vybraného PC -->
             <div id="pc-detail" class="pc-detail-container">
                 <div class="pc-detail-content">
                     <div class="pc-info-text">
@@ -298,43 +294,28 @@
                 title: "FPS-PC Fortnite Starter",
                 price: "8 990 Kč",
                 mailSubject: "Zájem o Fortnite Starter (5-10k)",
-                specs: [
-                    "• CPU: Intel i5 6. generace",
-                    "• GPU: NVIDIA GTX 1060 6GB",
-                    "• RAM: 16GB DDR4",
-                    "• SSD: 500GB Rychlé SSD",
-                    "• Výkon: Fortnite (120+ FPS na Performance)"
-                ]
+                specs: ["• CPU: Intel i5 6. generace", "• GPU: NVIDIA GTX 1060 6GB", "• RAM: 16GB DDR4", "• SSD: 500GB Rychlé SSD", "• Výkon: Fortnite (120+ FPS)"]
             },
             kat2: {
                 title: "FPS-PC GameGamer",
                 price: "13 490 Kč",
                 mailSubject: "Zájem o GameGamer (10-15k)",
-                specs: [
-                    "• CPU: AMD Ryzen 5 3600",
-                    "• GPU: NVIDIA GTX 1660 Super 6GB",
-                    "• RAM: 16GB DDR4 Gaming",
-                    "• SSD: 500GB NVMe M.2",
-                    "• Výkon: CS2, GTA V, Apex Legends"
-                ]
+                specs: ["• CPU: AMD Ryzen 5 3600", "• GPU: NVIDIA GTX 1660 Super 6GB", "• RAM: 16GB DDR4 Gaming", "• SSD: 500GB NVMe M.2", "• Výkon: CS2, GTA V, Apex Legends"]
             },
             kat3: {
                 title: "FPS-PC UltraStreamer",
                 price: "22 990 Kč",
                 mailSubject: "Zájem o UltraStreamer (15-25k)",
-                specs: [
-                    "• CPU: AMD Ryzen 5 5600X",
-                    "• GPU: NVIDIA RTX 4060 8GB GDDR6",
-                    "• RAM: 32GB DDR4 High-Speed",
-                    "• SSD: 1TB NVMe Gen4 SSD",
+                specs: ["• CPU: AMD Ryzen 5 5600X", "• GPU: NVIDIA RTX 4060 8GB GDDR6", "• RAM: 32GB DDR4 High-Speed", "• SSD: 1TB NVMe Gen4 SSD", "• Výkon: Hraní nejnovějších her na High"]
+            },
+            kat4: {
+                title: "FPS-PC ApexKing",
+                price: "33 490 Kč",
+                mailSubject: "Zájem o ApexKing (25-35k)",
+                specs: ["• CPU: AMD Ryzen 7 7800X3D", "• GPU: NVIDIA RTX 4070 Super 12GB", "• RAM: 32GB DDR5 6000MHz", "• SSD: 2TB NVMe Gen4 Rychloběžný", "• Výkon: Brutální výkon v 1440p / 4K"]
+            }
+        };
 
-
-
-
-
-
-
-
-
-
-
+        function showPC(kategorieId, element) {
+            document.querySelectorAll('.category-box').forEach(box => box.classList.remove('active'));
+            element.classList.add('active');

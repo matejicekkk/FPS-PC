@@ -1,397 +1,111 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FPS-PC | Detail sestavy</title>
-  <style>
-    * { box-sizing: border-box; }
-    
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #f8fafc;
-      color: #1e293b;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS-PC | Kategorie 15-25k</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #ffffff; color: #1e293b; font-family: 'Segoe UI', Roboto, sans-serif; }
+        header { background-color: #ffffff; padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .logo-container { display: flex; align-items: center; text-decoration: none; }
+        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; }
+        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
+        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
+        
+        .container { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+        h2 { font-size: 28px; text-align: center; margin-bottom: 40px; }
+        h2 span { color: #0066ff; }
 
-    header {
-      background-color: #ffffff;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e2e8f0;
-    }
+        .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
+        /* KARTA JAKO ČISTÉ TLAČÍTKO / ODKAZ */
+        .pc-card {
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            color: inherit;
+            box-sizing: border-box;
+            cursor: pointer;
+            user-select: none;
+            aspect-ratio: 1 / 1;
+        }
 
-    .logo-fps {
-      font-size: 24px;
-      font-weight: 900;
-      color: #1e293b;
-      border: 3px solid #1e293b;
-      padding: 2px 8px;
-      text-transform: uppercase;
-    }
+        /* NVIDIA vs AMD Barevné okraje */
+        .pc-card.nvidia { border-color: #76b900; }
+        .pc-card.amd { border-color: #ed1c24; }
 
-    .logo-pc {
-      font-size: 24px;
-      font-weight: 900;
-      color: #0066ff;
-      text-transform: uppercase;
-      margin-left: 8px;
-    }
+        /* Efekt při najetí myší (Hover) */
+        .pc-card.nvidia:hover { box-shadow: 0 10px 25px rgba(118, 185, 0, 0.2); transform: translateY(-4px); }
+        .pc-card.amd:hover { box-shadow: 0 10px 25px rgba(237, 28, 36, 0.2); transform: translateY(-4px); }
 
-    .btn-back {
-      text-decoration: none;
-      color: #0066ff;
-      font-weight: 700;
-      font-size: 15px;
-    }
+        /* Efekt stisknutí (Active) - DÁVÁ POCIT ZMÁČKNUTÍ TLAČÍTKA */
+        .pc-card:active {
+            transform: scale(0.96) translateY(0);
+        }
 
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+        .pc-img { width: 100%; height: 80px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
+        .pc-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-    /* SESTAVA DETAIL */
-    .product-detail-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 35px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      border: 1px solid #e2e8f0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: 850px) {
-      .product-detail-card { grid-template-columns: 1fr; }
-    }
-
-    .product-image-container { text-align: center; }
-    .product-image-container img {
-      max-width: 100%;
-      height: auto;
-      max-height: 380px;
-      object-fit: contain;
-    }
-
-    .product-info h1 {
-      font-size: 26px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-
-    .specs-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 25px 0;
-    }
-
-    .specs-list li {
-      font-size: 14px;
-      padding: 8px 0;
-      border-bottom: 1px solid #f1f5f9;
-      color: #475569;
-    }
-
-    .price-tag {
-      font-size: 32px;
-      font-weight: 900;
-      color: #22c55e;
-      margin-bottom: 20px;
-    }
-
-    .btn-buy {
-      display: block;
-      width: 100%;
-      background-color: #22c55e;
-      color: #ffffff;
-      text-align: center;
-      padding: 16px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 16px;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* TESTY SESTAVY */
-    .section-title {
-      font-size: 20px;
-      font-weight: 900;
-      text-transform: uppercase;
-      color: #0f172a;
-      margin-bottom: 25px;
-    }
-
-    .category-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      margin-top: 30px;
-    }
-
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .game-card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 22px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    }
-
-    .game-card h3 {
-      margin: 0 0 18px 0;
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      text-align: center;
-    }
-
-    .control-group {
-      margin-bottom: 14px;
-    }
-
-    .control-group label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
-      margin-bottom: 6px;
-    }
-
-    .value-badge {
-      color: #0066ff;
-      font-weight: 800;
-    }
-
-    .control-group input[type="range"] {
-      width: 100%;
-      height: 6px;
-      background: #e2e8f0;
-      border-radius: 5px;
-      outline: none;
-      accent-color: #0066ff;
-      cursor: pointer;
-    }
-
-    .fps-box {
-      background: #f0f7ff;
-      border: 1px solid #dbeafe;
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .fps-value {
-      font-size: 32px;
-      font-weight: 900;
-      color: #0066ff;
-    }
-
-    .fps-unit {
-      font-size: 16px;
-      font-weight: 800;
-      color: #0066ff;
-      margin-left: 4px;
-    }
-  </style>
+        /* Cenovka / Tlačítko uvnitř karty */
+        .price { font-size: 16px; font-weight: 800; padding: 8px 16px; border-radius: 8px; white-space: nowrap; }
+        .pc-card.nvidia .price { color: #16a34a; background-color: #f0fdf4; }
+        .pc-card.amd .price { color: #dc2626; background-color: #fef2f2; }
+    </style>
 </head>
 <body>
+    <header>
+        <a href="index.html" class="logo-container">
+            <div class="logo-fps">FPS</div>
+            <div class="logo-pc">PC</div>
+        </a>
+        <a href="index.html" class="btn-back">← Zpět na úvod</a>
+    </header>
+    <div class="container">
+        <h2>Sestavy <span>15 000 - 25 000 Kč</span></h2>
+        <div class="compare-grid">
+            
+            <!-- Karta 1: NVIDIA -->
+            <a href="detail-pc1.html" class="pc-card nvidia">
+                <div class="pc-img">
+                    <img src="https://via.placeholder.com/100" alt="PC NVIDIA">
+                </div>
+                <span class="price">18 500 Kč</span>
+            </a>
 
-  <header>
-    <a href="index.html" class="logo-container">
-      <span class="logo-fps">FPS</span>
-      <span class="logo-pc">PC</span>
-    </a>
-    <a href="index.html" class="btn-back">← Zpět na úvod</a>
-  </header>
+            <!-- Karta 2: NVIDIA -->
+            <a href="detail-pc2.html" class="pc-card nvidia">
+                <div class="pc-img">
+                    <img src="https://via.placeholder.com/100" alt="PC NVIDIA">
+                </div>
+                <span class="price">22 990 Kč</span>
+            </a>
 
-  <div class="container">
+            <!-- Karta 3: AMD -->
+            <a href="detail-pc3.html" class="pc-card amd">
+                <div class="pc-img">
+                    <img src="https://via.placeholder.com/100" alt="PC AMD">
+                </div>
+                <span class="price">16 990 Kč</span>
+            </a>
 
-    <div class="product-detail-card">
-      <div class="product-image-container">
-        <img src="image.png" alt="Herní PC">
-      </div>
-      <div class="product-info">
-        <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-        <ul class="specs-list">
-          <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-          <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-          <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-          <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-          <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-        </ul>
-        <div class="price-tag">7 490 Kč</div>
-        <button class="btn-buy">MÁM ZÁJEM O TUTO MAŠINU</button>
-      </div>
+            <!-- Karta 4: AMD -->
+            <a href="detail-pc4.html" class="pc-card amd">
+                <div class="pc-img">
+                    <img src="https://via.placeholder.com/100" alt="PC AMD">
+                </div>
+                <span class="price">21 990 Kč</span>
+            </a>
+
+        </div>
     </div>
-
-    <section class="fps-section">
-      <div class="section-title">⚡ INTERAKTIVNÍ TESTY VÝKONU SESTAVY</div>
-
-      <!-- 3 E-SPORT HRY -->
-      <div class="category-title">🏆 KOMPETITIVNÍ & E-SPORT HRY (VYSOKÉ FPS)</div>
-      <div class="games-grid">
-        
-        <!-- Fortnite -->
-        <div class="game-card">
-          <h3>Fortnite</h3>
-          <div class="control-group">
-            <label>Rozlišení: <span class="value-badge" id="res-lbl-fortnite">FHD (1080p)</span></label>
-            <input type="range" id="res-fortnite" min="0" max="2" value="0" oninput="updateFPS('fortnite')">
-          </div>
-          <div class="control-group">
-            <label>Detaily: <span class="value-badge" id="det-lbl-fortnite">Low</span></label>
-            <input type="range" id="det-fortnite" min="0" max="3" value="0" oninput="updateFPS('fortnite')">
-          </div>
-          <div class="fps-box">
-            <span class="fps-value" id="fps-fortnite">240+</span><span class="fps-unit">FPS</span>
-          </div>
-        </div>
-
-        <!-- Counter-Strike 2 -->
-        <div class="game-card">
-          <h3>Counter-Strike 2</h3>
-          <div class="control-group">
-            <label>Rozlišení: <span class="value-badge" id="res-lbl-cs2">FHD (1080p)</span></label>
-            <input type="range" id="res-cs2" min="0" max="2" value="0" oninput="updateFPS('cs2')">
-          </div>
-          <div class="control-group">
-            <label>Detaily: <span class="value-badge" id="det-lbl-cs2">Low</span></label>
-            <input type="range" id="det-cs2" min="0" max="3" value="0" oninput="updateFPS('cs2')">
-          </div>
-          <div class="fps-box">
-            <span class="fps-value" id="fps-cs2">320+</span><span class="fps-unit">FPS</span>
-          </div>
-        </div>
-
-        <!-- Valorant -->
-        <div class="game-card">
-          <h3>Valorant</h3>
-          <div class="control-group">
-            <label>Rozlišení: <span class="value-badge" id="res-lbl-valorant">FHD (1080p)</span></label>
-            <input type="range" id="res-valorant" min="0" max="2" value="0" oninput="updateFPS('valorant')">
-          </div>
-          <div class="control-group">
-            <label>Detaily: <span class="value-badge" id="det-lbl-valorant">Low</span></label>
-            <input type="range" id="det-valorant" min="0" max="3" value="0" oninput="updateFPS('valorant')">
-          </div>
-          <div class="fps-box">
-            <span class="fps-value" id="fps-valorant">380+</span><span class="fps-unit">FPS</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 2 AAA HRY -->
-      <div class="category-title">🎬 AAA & GRAFICKY NÁROČNÉ HRY</div>
-      <div class="games-grid">
-        
-        <!-- Cyberpunk 2077 -->
-        <div class="game-card">
-          <h3>Cyberpunk 2077</h3>
-          <div class="control-group">
-            <label>Rozlišení: <span class="value-badge" id="res-lbl-cyberpunk">FHD (1080p)</span></label>
-            <input type="range" id="res-cyberpunk" min="0" max="2" value="0" oninput="updateFPS('cyberpunk')">
-          </div>
-          <div class="control-group">
-            <label>Detaily: <span class="value-badge" id="det-lbl-cyberpunk">Low</span></label>
-            <input type="range" id="det-cyberpunk" min="0" max="3" value="0" oninput="updateFPS('cyberpunk')">
-          </div>
-          <div class="fps-box">
-            <span class="fps-value" id="fps-cyberpunk">105+</span><span class="fps-unit">FPS</span>
-          </div>
-        </div>
-
-        <!-- GTA V -->
-        <div class="game-card">
-          <h3>GTA V</h3>
-          <div class="control-group">
-            <label>Rozlišení: <span class="value-badge" id="res-lbl-gtav">FHD (1080p)</span></label>
-            <input type="range" id="res-gtav" min="0" max="2" value="0" oninput="updateFPS('gtav')">
-          </div>
-          <div class="control-group">
-            <label>Detaily: <span class="value-badge" id="det-lbl-gtav">Low</span></label>
-            <input type="range" id="det-gtav" min="0" max="3" value="0" oninput="updateFPS('gtav')">
-          </div>
-          <div class="fps-box">
-            <span class="fps-value" id="fps-gtav">160+</span><span class="fps-unit">FPS</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
-
-  <script>
-    const resText = ["FHD (1080p)", "QHD (2K)", "4K"];
-    const detText = ["Low", "Medium", "High", "Ultra"];
-
-    // [FHD, 2K, 4K] x [Low, Medium, High, Ultra]
-    const fpsTable = {
-      fortnite: [
-        [240, 160, 110, 75],
-        [170, 110, 75, 50],
-        [100, 60, 40, 25]
-      ],
-      cs2: [
-        [320, 260, 210, 170],
-        [230, 180, 140, 110],
-        [130, 100, 80, 60]
-      ],
-      valorant: [
-        [380, 340, 300, 260],
-        [280, 240, 200, 170],
-        [180, 150, 120, 100]
-      ],
-      cyberpunk: [
-        [105, 85, 65, 50],
-        [75, 55, 40, 30],
-        [40, 30, 20, 15]
-      ],
-      gtav: [
-        [160, 130, 100, 80],
-        [120, 95, 75, 55],
-        [70, 55, 40, 30]
-      ]
-    };
-
-    function updateFPS(game) {
-      const resVal = document.getElementById('res-' + game).value;
-      const detVal = document.getElementById('det-' + game).value;
-
-      document.getElementById('res-lbl-' + game).innerText = resText[resVal];
-      document.getElementById('det-lbl-' + game).innerText = detText[detVal];
-
-      const fps = fpsTable[game][resVal][detVal];
-      document.getElementById('fps-' + game).innerText = fps + "+";
-    }
-  </script>
-
 </body>
 </html>

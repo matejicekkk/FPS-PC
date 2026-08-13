@@ -197,59 +197,6 @@
       cursor: pointer;
     }
 
-    /* PREPINAC RAY TRACING */
-    .switch-label-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
-      margin-top: 10px;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 44px;
-      height: 22px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #cbd5e1;
-      transition: .3s;
-      border-radius: 22px;
-    }
-
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .3s;
-      border-radius: 50%;
-    }
-
-    input:checked + .toggle-slider {
-      background-color: #0066ff;
-    }
-
-    input:checked + .toggle-slider:before {
-      transform: translateX(22px);
-    }
-
     .fps-box {
       background: #f0f7ff;
       border: 1px solid #dbeafe;
@@ -314,15 +261,6 @@
             <label>Detaily: <span class="value-badge" id="det-label-fortnite">Low</span></label>
             <input type="range" id="det-fortnite" min="0" max="3" value="0">
           </div>
-          <div class="control-group">
-            <div class="switch-label-wrapper">
-              <span>Ray Tracing: <span class="value-badge" id="rt-label-fortnite">OFF</span></span>
-              <label class="switch">
-                <input type="checkbox" id="rt-fortnite">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-          </div>
           <div class="fps-box">
             <div class="fps-value" id="fps-fortnite">150 FPS</div>
           </div>
@@ -339,15 +277,6 @@
             <label>Detaily: <span class="value-badge" id="det-label-cs2">Low</span></label>
             <input type="range" id="det-cs2" min="0" max="3" value="0">
           </div>
-          <div class="control-group">
-            <div class="switch-label-wrapper">
-              <span>Ray Tracing: <span class="value-badge" id="rt-label-cs2">OFF</span></span>
-              <label class="switch">
-                <input type="checkbox" id="rt-cs2">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-          </div>
           <div class="fps-box">
             <div class="fps-value" id="fps-cs2">200 FPS</div>
           </div>
@@ -363,15 +292,6 @@
           <div class="control-group">
             <label>Detaily: <span class="value-badge" id="det-label-valorant">Low</span></label>
             <input type="range" id="det-valorant" min="0" max="3" value="0">
-          </div>
-          <div class="control-group">
-            <div class="switch-label-wrapper">
-              <span>Ray Tracing: <span class="value-badge" id="rt-label-valorant">OFF</span></span>
-              <label class="switch">
-                <input type="checkbox" id="rt-valorant">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
           </div>
           <div class="fps-box">
             <div class="fps-value" id="fps-valorant">240 FPS</div>
@@ -395,15 +315,6 @@
             <label>Detaily: <span class="value-badge" id="det-label-cyberpunk">Low</span></label>
             <input type="range" id="det-cyberpunk" min="0" max="3" value="0">
           </div>
-          <div class="control-group">
-            <div class="switch-label-wrapper">
-              <span>Ray Tracing: <span class="value-badge" id="rt-label-cyberpunk">OFF</span></span>
-              <label class="switch">
-                <input type="checkbox" id="rt-cyberpunk">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-          </div>
           <div class="fps-box">
             <div class="fps-value" id="fps-cyberpunk">60 FPS</div>
           </div>
@@ -419,15 +330,6 @@
           <div class="control-group">
             <label>Detaily: <span class="value-badge" id="det-label-gtav">Low</span></label>
             <input type="range" id="det-gtav" min="0" max="3" value="0">
-          </div>
-          <div class="control-group">
-            <div class="switch-label-wrapper">
-              <span>Ray Tracing: <span class="value-badge" id="rt-label-gtav">OFF</span></span>
-              <label class="switch">
-                <input type="checkbox" id="rt-gtav">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
           </div>
           <div class="fps-box">
             <div class="fps-value" id="fps-gtav">120 FPS</div>
@@ -457,22 +359,11 @@
     function recalculate(game) {
       const resVal = parseInt(document.getElementById('res-' + game).value);
       const detVal = parseInt(document.getElementById('det-' + game).value);
-      const rtCheck = document.getElementById('rt-' + game);
-
-      let rtMultiplier = 1.0;
-      if (rtCheck && rtCheck.checked) {
-        rtMultiplier = 0.50; 
-        document.getElementById('rt-label-' + game).innerText = "ON";
-        document.getElementById('rt-label-' + game).style.color = "#0066ff";
-      } else if (rtCheck) {
-        document.getElementById('rt-label-' + game).innerText = "OFF";
-        document.getElementById('rt-label-' + game).style.color = "#64748b";
-      }
 
       document.getElementById('res-label-' + game).innerText = resNames[resVal];
       document.getElementById('det-label-' + game).innerText = detNames[detVal];
 
-      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal] * rtMultiplier);
+      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal]);
       
       document.getElementById('fps-' + game).innerText = calculated + " FPS";
     }
@@ -482,11 +373,9 @@
     games.forEach(game => {
       const resInput = document.getElementById('res-' + game);
       const detInput = document.getElementById('det-' + game);
-      const rtInput = document.getElementById('rt-' + game);
 
       if (resInput) resInput.addEventListener('input', () => recalculate(game));
       if (detInput) detInput.addEventListener('input', () => recalculate(game));
-      if (rtInput) rtInput.addEventListener('change', () => recalculate(game));
     });
   </script>
 

@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Výkonné herní mašiny</title>
     <style>
-        /* Zamknutí na jednu obrazovku bez scrollování */
+        /* Celá stránka je uzamčená na jednu obrazovku bez scrollování */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #1e293b;
             font-family: 'Segoe UI', Roboto, sans-serif;
             overflow: hidden; 
         }
+
         body {
             display: flex;
             flex-direction: column;
+            /* Na pozadí je vložen AI obrázek hráče v cyberpunk stylu */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://stockcake.com');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         header {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
             padding: 10px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #e2e8f0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         /* Logo: FPS velké v šedém rámečku, PC velké modré */
@@ -63,15 +69,27 @@
         }
         nav a:hover { color: #0066ff; }
 
-        /* Středový obsah */
+        /* Hlavní středový panel ve stylu HelloComp */
         .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
             box-sizing: border-box;
+        }
+
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1150px;
+            width: 100%;
         }
 
         h1 {
@@ -79,6 +97,7 @@
             font-weight: 800;
             margin: 0 0 5px 0;
             text-align: center;
+            color: #0f172a;
         }
         h1 span { color: #0066ff; }
         
@@ -89,12 +108,11 @@
             text-align: center;
         }
 
-        /* Mřížka pro 4 střední čtverce vedle sebe */
+        /* 4 střední čtverce vedle sebe */
         .grid-container {
             width: 100%;
-            max-width: 1100px; /* Širší kontejner, aby se vešly 4 vedle sebe */
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Přesně 4 sloupce */
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
 
@@ -102,7 +120,7 @@
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 35px 15px;
+            padding: 30px 10px;
             text-decoration: none;
             color: inherit;
             display: flex;
@@ -122,20 +140,20 @@
         }
 
         .category-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 15px;
         }
 
         .category-price {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             color: #0066ff;
             background-color: #f0f6ff;
             padding: 8px 12px;
             border-radius: 6px;
-            white-space: nowrap; /* Zabrání rozdělení ceny na dva řádky */
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -153,39 +171,43 @@
     </header>
 
     <div class="main-content">
-        <h1>Poctivé <span>Herní Mašiny</span></h1>
-        <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
+        <!-- Bílý čistý podklad, ze kterého svítí kategorie a drží vše pohromadě -->
+        <div class="glass-panel">
+            <h1>Poctivé <span>Herní Mašiny</span></h1>
+            <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
-        <!-- 4 Kategorie vedle sebe v jedné řadě -->
-        <div class="grid-container">
-            <!-- Čtverec 1 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 5-10k" class="category-box">
-                <span class="category-name">Základní výkon</span>
-                <span class="category-price">5 000 - 10 000 Kč</span>
-            </a>
+            <!-- 4 Kategorie vedle sebe -->
+            <div class="grid-container">
+                <!-- Čtverec 1 -->
+                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 5-10k" class="category-box">
+                    <span class="category-name">Základní výkon</span>
+                    <span class="category-price">5 000 - 10 000 Kč</span>
+                </a>
 
-            <!-- Čtverec 2 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 10-15k" class="category-box">
-                <span class="category-name">Dostupný gaming</span>
-                <span class="category-price">10 000 - 15 000 Kč</span>
-            </a>
+                <!-- Čtverec 2 -->
+                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 10-15k" class="category-box">
+                    <span class="category-name">Dostupný gaming</span>
+                    <span class="category-price">10 000 - 15 000 Kč</span>
+                </a>
 
-            <!-- Čtverec 3 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 15-25k" class="category-box">
-                <span class="category-name">Pokročilý výkon</span>
-                <span class="category-price">15 000 - 25 000 Kč</span>
-            </a>
+                <!-- Čtverec 3 -->
+                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 15-25k" class="category-box">
+                    <span class="category-name">Pokročilý výkon</span>
+                    <span class="category-price">15 000 - 25 000 Kč</span>
+                </a>
 
-            <!-- Čtverec 4 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 25-35k" class="category-box">
-                <span class="category-name">High-end mašiny</span>
-                <span class="category-price">25 000 - 35 000 Kč</span>
-            </a>
+                <!-- Čtverec 4 -->
+                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 25-35k" class="category-box">
+                    <span class="category-name">High-end mašiny</span>
+                    <span class="category-price">25 000 - 35 000 Kč</span>
+                </a>
+            </div>
         </div>
     </div>
 
 </body>
 </html>
+
 
 
 

@@ -10,7 +10,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #f8fafc;
+      background-color: #ffffff;
       color: #1e293b;
       font-family: 'Segoe UI', Roboto, sans-serif;
     }
@@ -55,7 +55,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 40px auto;
       padding: 0 20px;
       text-align: center;
@@ -70,8 +70,9 @@
     }
 
     .pc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 25px;
     }
 
@@ -79,37 +80,51 @@
       background: #ffffff;
       border-radius: 16px;
       padding: 25px;
-      border: 2px solid #e2e8f0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      width: 240px;
+      height: 280px;
       text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s;
     }
 
     .pc-card:hover {
       transform: translateY(-5px);
-      border-color: #0066ff;
+    }
+
+    .pc-card.border-green {
+      border: 2px solid #22c55e;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
+    }
+
+    .pc-card.border-red {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
     }
 
     .pc-card img {
       max-width: 100%;
-      height: 160px;
+      height: 140px;
       object-fit: contain;
-      margin-bottom: 20px;
     }
 
-    .pc-card h3 {
-      font-size: 16px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 15px;
-    }
-
-    .pc-price {
-      font-size: 22px;
+    .pc-price-box {
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 18px;
       font-weight: 900;
+    }
+
+    .pc-card.border-green .pc-price-box {
       color: #22c55e;
+      background: #f0fdf4;
+    }
+
+    .pc-card.border-red .pc-price-box {
+      color: #ef4444;
+      background: #fef2f2;
     }
   </style>
 </head>
@@ -128,24 +143,27 @@
 
     <div class="pc-grid">
       <!-- Sestava 1 -->
-      <a href="detail-pc2.html" class="pc-card">
+      <a href="detail-pc2.html" class="pc-card border-green">
         <img src="images.jpg" alt="Herní PC">
-        <h3>Herní PC RTX 2060 | Ryzen 5 3600</h3>
-        <div class="pc-price">10 990 Kč</div>
+        <div class="pc-price-box">10 990 Kč</div>
       </a>
 
       <!-- Sestava 2 -->
-      <a href="detail-pc3.html" class="pc-card">
+      <a href="detail-pc3.html" class="pc-card border-red">
         <img src="images.jpg" alt="Herní PC">
-        <h3>Herní PC RX 6600 | i3-12100F</h3>
-        <div class="pc-price">13 990 Kč</div>
+        <div class="pc-price-box">12 490 Kč</div>
       </a>
 
       <!-- Sestava 3 -->
-      <a href="detail-pc4.html" class="pc-card">
+      <a href="detail-pc4.html" class="pc-card border-green">
         <img src="images.jpg" alt="Herní PC">
-        <h3>Herní PC RTX 3060 | Ryzen 5 5600</h3>
-        <div class="pc-price">14 990 Kč</div>
+        <div class="pc-price-box">13 990 Kč</div>
+      </a>
+
+      <!-- Sestava 4 -->
+      <a href="detail-pc9.html" class="pc-card border-red">
+        <img src="images.jpg" alt="Herní PC">
+        <div class="pc-price-box">14 990 Kč</div>
       </a>
     </div>
   </div>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Profesionální konfigurátor sestavy</title>
+    <title>FPS-PC | Profesionální konfigurátor</title>
     <style>
-        /* Moderní CSS reset a globální styly */
+        /* ČISTÁ HTML/CSS ARCHITEKTURA - ABSOLUTNÍ STABILITA */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -16,8 +16,7 @@
             padding: 0;
             background-color: #f8fafc;
             color: #1e293b;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         header {
@@ -33,8 +32,7 @@
         .logo-container { display: flex; align-items: center; text-decoration: none; }
         .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
         .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; transition: color 0.2s; }
-        .btn-back:hover { color: #0052cc; }
+        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
 
         .container {
             max-width: 1200px;
@@ -42,7 +40,7 @@
             padding: 40px 20px 80px 20px;
         }
 
-        /* Horní panel s detailem produktu */
+        /* Horní produktová karta */
         .product-container {
             background-color: #ffffff;
             border-radius: 16px;
@@ -65,7 +63,6 @@
         }
         .product-left img {
             max-width: 100%;
-            height: auto;
             max-height: 380px;
             object-fit: contain;
         }
@@ -116,13 +113,8 @@
             font-size: 18px;
             border-radius: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background-color 0.2s, transform 0.1s;
         }
-        .btn-buy:hover { background-color: #36a000; }
-        .btn-buy:active { transform: scale(0.98); }
 
-        /* Sekce herních testů */
         .fps-section-title {
             font-size: 24px;
             font-weight: 800;
@@ -142,10 +134,10 @@
             letter-spacing: 1px;
         }
 
-        /* Profi responzivní Grid, který se nikdy nerozbije */
+        /* Responzivní mřížka herních karet */
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
@@ -158,11 +150,6 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .fps-box:hover { 
-            border-color: #0066ff; 
-            box-shadow: 0 10px 20px -5px rgba(0,102,255,0.05);
         }
 
         .game-name {
@@ -170,76 +157,83 @@
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin: 0 0 20px 0;
+            margin: 0 0 15px 0;
         }
 
-        .slider-container {
-            margin-bottom: 16px;
-        }
-
-        .slider-label-row {
+        /* Lišta s výběrem rozlišení (Tabs) */
+        .tabs-header {
             display: flex;
-            justify-content: space-between;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+
+        .tabs-header label {
+            flex: 1;
+            text-align: center;
             font-size: 13px;
             font-weight: 700;
+            padding: 8px 0;
+            cursor: pointer;
+            border-radius: 6px;
             color: #64748b;
-            margin-bottom: 6px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 2px 8px;
-            border-radius: 4px;
+            transition: all 0.15s;
         }
 
-        .range-slider {
+        /* Skryté nativní přepínače */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* Výsledné tabulky s přesnými klesajícími FPS */
+        .fps-table {
             width: 100%;
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 3px;
-            outline: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #0066ff;
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
-        .range-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
+            border-collapse: collapse;
+            display: none; /* Skryté jako výchozí */
+            margin-bottom: 15px;
         }
 
-        /* Výsledkový panel s FPS */
-        .fps-result-box {
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f8fafc;
-            border-radius: 12px;
-            border: 1px solid #f1f5f9;
-        }
-        .fps-counter {
-            font-size: 36px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-        .fps-label {
+        .fps-table th {
+            text-align: left;
             font-size: 11px;
-            font-weight: 700;
             color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        /* Spodní řádek pro Ray-Tracing */
+        .fps-table td {
+            padding: 10px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #f8fafc;
+        }
+
+        .td-det { font-weight: 700; color: #475569; }
+        .td-fps { font-weight: 900; color: #0066ff; text-align: right; font-size: 18px; }
+
+        /* --- LOGIKA ZOBRAZOVÁNÍ PODLE ZAKLIKNUTÉHO TLAČÍTKA --- */
+        /* Aktivní vzhled tlačítek rozlišení */
+        #fhd-fort:checked ~ .tabs-header label[for="fhd-fort"], #k2-fort:checked ~ .tabs-header label[for="k2-fort"], #k4-fort:checked ~ .tabs-header label[for="k4-fort"],
+        #fhd-cs:checked ~ .tabs-header label[for="fhd-cs"], #k2-cs:checked ~ .tabs-header label[for="k2-cs"], #k4-cs:checked ~ .tabs-header label[for="k4-cs"],
+        #fhd-mc:checked ~ .tabs-header label[for="fhd-mc"], #k2-mc:checked ~ .tabs-header label[for="k2-mc"], #k4-mc:checked ~ .tabs-header label[for="k4-mc"],
+        #fhd-cp:checked ~ .tabs-header label[for="fhd-cp"], #k2-cp:checked ~ .tabs-header label[for="k2-cp"], #k4-cp:checked ~ .tabs-header label[for="k4-cp"],
+        #fhd-gta:checked ~ .tabs-header label[for="fhd-gta"], #k2-gta:checked ~ .tabs-header label[for="k2-gta"], #k4-gta:checked ~ .tabs-header label[for="k4-gta"] {
+            background-color: #ffffff;
+            color: #0066ff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        /* Zobrazení správné tabulky s adekvátními FPS hodnotami */
+        #fhd-fort:checked ~ #t-fort-fhd, #k2-fort:checked ~ #t-fort-2k, #k4-fort:checked ~ #t-fort-4k,
+        #fhd-cs:checked ~ #t-cs-fhd, #k2-cs:checked ~ #t-cs-2k, #k4-cs:checked ~ #t-cs-4k,
+        #fhd-mc:checked ~ #t-mc-fhd, #k2-mc:checked ~ #t-mc-2k, #k4-mc:checked ~ #t-mc-4k,
+        #fhd-cp:checked ~ #t-cp-fhd, #k2-cp:checked ~ #t-cp-2k, #k4-cp:checked ~ #t-cp-4k,
+        #fhd-gta:checked ~ #t-gta-fhd, #k2-gta:checked ~ #t-gta-2k, #k4-gta:checked ~ #t-gta-4k {
+            display: table;
+        }
+
+        /* Box pro Ray-Tracing */
         .rt-row {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -248,21 +242,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto; /* Tlačí RT box vždy na dno karty */
+            margin-top: auto;
         }
         .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
         .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
-
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
+        .fps-box.no-rt .rt-row { background-color: #f1f5f9; border-color: #e2e8f0; }
         .fps-box.no-rt .rt-label { color: #94a3b8; }
         .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
 
         @media (max-width: 768px) {
             .product-left { border-right: none; border-bottom: 1px solid #e2e8f0; }
-            header { padding: 15px 20px; }
         }
     </style>
 </head>
@@ -277,10 +266,10 @@
     </header>
 
     <div class="container">
-        <!-- Hlavní produktová specifikace -->
+        <!-- Specifikace počítače -->
         <div class="product-container">
             <div class="product-left">
-                <img src="test.webp" alt="FPS-PC herní sestava">
+                <img src="test.webp" alt="Herní PC Sestava">
             </div>
             <div class="product-right">
                 <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
@@ -298,13 +287,4 @@
 
         <div class="fps-section-title">⚡ Živé výkonnostní testy hardwaru</div>
 
-        <!-- SKUPINA 1 -->
         <div class="game-group-title">🏆 Kompetitivní & E-sport tituly</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="aktualizovatKalkulator('fortnite')">

@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
+        /* 100% ČISTÉ HTML/CSS ROZVRŽENÍ - ŽÁDNÝ JAVASCRIPT */
         html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
@@ -32,6 +31,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            padding-bottom: 60px;
         }
 
         .product-container {
@@ -135,9 +135,10 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             max-width: 1100px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 30px auto;
         }
 
+        /* STRUKTURA INTERAKTIVNÍ KARTY POMOCÍ CSS VRSTEV */
         .fps-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
@@ -147,6 +148,7 @@
             flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             box-sizing: border-box;
+            position: relative;
         }
         .fps-box:hover { border-color: #0066ff; }
 
@@ -158,135 +160,133 @@
             margin-bottom: 15px;
         }
 
-        .slider-container {
-            margin-bottom: 12px;
+        /* Výběrová řádka z čistého CSS */
+        .config-tabs {
+            display: flex;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 2px;
+            margin-bottom: 10px;
         }
 
-        .slider-label-row {
-            display: flex;
-            justify-content: space-between;
+        .config-tabs label {
+            flex: 1;
+            text-align: center;
             font-size: 12px;
             font-weight: 700;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
-
-        .range-slider {
-            width: 100%;
-            margin: 5px 0;
+            padding: 6px 2px;
             cursor: pointer;
+            border-radius: 4px;
+            color: #64748b;
+            transition: all 0.15s;
         }
 
-        .fps-result-box {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8fafc;
-            border-radius: 8px;
+        /* Skryté HTML přepínače */
+        input[type="radio"] {
+            display: none;
         }
-        .fps-counter {
-            font-size: 32px;
+
+        /* Přepínání textu FPS na základě zakliknutého tlačítka */
+        .fps-wrapper .fps-val {
+            display: none;
+            font-size: 34px;
             font-weight: 900;
             color: #0066ff;
-            display: block;
+            text-align: center;
+            margin: 15px 0;
+            animation: popIn 0.2s ease;
         }
+
+        @keyframes popIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .fps-wrapper {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            min-height: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .fps-label {
             font-size: 11px;
             font-weight: 600;
             color: #94a3b8;
             text-transform: uppercase;
+            text-align: center;
+            display: block;
         }
 
-        .rt-row {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
+        /* PRÁCE S CSS SELEKTORY PRO POHYBY PODLE REALITY */
+        /* Hra 1: Fortnite */
+        #fhd-fort:checked ~ .config-tabs label[for="fhd-fort"],
+        #k2-fort:checked ~ .config-tabs label[for="k2-fort"],
+        #k4-fort:checked ~ .config-tabs label[for="k4-fort"],
+        #low-fort:checked ~ .config-tabs label[for="low-fort"],
+        #mid-fort:checked ~ .config-tabs label[for="mid-fort"],
+        #high-fort:checked ~ .config-tabs label[for="high-fort"],
+        /* Hra 2: CS2 */
+        #fhd-cs:checked ~ .config-tabs label[for="fhd-cs"],
+        #k2-cs:checked ~ .config-tabs label[for="k2-cs"],
+        #k4-cs:checked ~ .config-tabs label[for="k4-cs"],
+        #low-cs:checked ~ .config-tabs label[for="low-cs"],
+        #mid-cs:checked ~ .config-tabs label[for="mid-cs"],
+        #high-cs:checked ~ .config-tabs label[for="high-cs"],
+        /* Hra 3: Minecraft */
+        #fhd-mc:checked ~ .config-tabs label[for="fhd-mc"],
+        #k2-mc:checked ~ .config-tabs label[for="k2-mc"],
+        #k4-mc:checked ~ .config-tabs label[for="k4-mc"],
+        #low-mc:checked ~ .config-tabs label[for="low-mc"],
+        #mid-mc:checked ~ .config-tabs label[for="mid-mc"],
+        #high-mc:checked ~ .config-tabs label[for="high-mc"],
+        /* Hra 4: Valorant */
+        #fhd-val:checked ~ .config-tabs label[for="fhd-val"],
+        #k2-val:checked ~ .config-tabs label[for="k2-val"],
+        #k4-val:checked ~ .config-tabs label[for="k4-val"],
+        #low-val:checked ~ .config-tabs label[for="low-val"],
+        #mid-val:checked ~ .config-tabs label[for="mid-val"],
+        #high-val:checked ~ .config-tabs label[for="high-val"],
+        /* Hra 5: Apex */
+        #fhd-ap:checked ~ .config-tabs label[for="fhd-ap"],
+        #k2-ap:checked ~ .config-tabs label[for="k2-ap"],
+        #k4-ap:checked ~ .config-tabs label[for="k4-ap"],
+        #low-ap:checked ~ .config-tabs label[for="low-ap"],
+        #mid-ap:checked ~ .config-tabs label[for="mid-ap"],
+        #high-ap:checked ~ .config-tabs label[for="high-ap"],
+        /* Hra 6: Cyberpunk */
+        #fhd-cp:checked ~ .config-tabs label[for="fhd-cp"],
+        #k2-cp:checked ~ .config-tabs label[for="k2-cp"],
+        #k4-cp:checked ~ .config-tabs label[for="k4-cp"],
+        #low-cp:checked ~ .config-tabs label[for="low-cp"],
+        #mid-cp:checked ~ .config-tabs label[for="mid-cp"],
+        #high-cp:checked ~ .config-tabs label[for="high-cp"],
+        /* Hra 7: GTA V */
+        #fhd-gta:checked ~ .config-tabs label[for="fhd-gta"],
+        #k2-gta:checked ~ .config-tabs label[for="k2-gta"],
+        #k4-gta:checked ~ .config-tabs label[for="k4-gta"],
+        #low-gta:checked ~ .config-tabs label[for="low-gta"],
+        #mid-gta:checked ~ .config-tabs label[for="mid-gta"],
+        #high-gta:checked ~ .config-tabs label[for="high-gta"],
+        /* Hra 8: RDR2 */
+        #fhd-rd:checked ~ .config-tabs label[for="fhd-rd"],
+        #k2-rd:checked ~ .config-tabs label[for="k2-rd"],
+        #k4-rd:checked ~ .config-tabs label[for="k4-rd"],
+        #low-rd:checked ~ .config-tabs label[for="low-rd"],
+        #mid-rd:checked ~ .config-tabs label[for="mid-rd"],
+        #high-rd:checked ~ .config-tabs label[for="high-rd"] {
+            background-color: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
-        .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
 
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-        .fps-box.no-rt .rt-label { color: #94a3b8; }
-        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
-    </header>
-
-    <div class="container">
-        <!-- Hlavní parametry PC -->
-        <div class="product-container">
-            <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
-            </div>
-            <div class="product-right">
-                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                <ul class="specs-grid">
-                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-                </ul>
-                <span class="price-tag">7 490 Kč</span>
-                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
-            </div>
-        </div>
-
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
-
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="prepniVykon('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="prepniVykon('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="prepniVykon('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
+        /* LOGIKA SKRÝVÁNÍ / ZOBRAZOVÁNÍ PODLE ZAKLIKNUTÉ KATEGORIE */
+        /* Fortnite přepínání klesajícího výkonu */
+        #fhd-fort:checked ~ .fps-wrapper #v-fort-fhd,
+        #k2-fort:checked ~ .fps-wrapper #v-fort-2k,
+        #k4-fort:checked ~ .fps-wrapper #v-fort-4k,
+        /* CS2 přepínání */

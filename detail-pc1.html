@@ -7,7 +7,7 @@
     <style>
         html, body {
             height: auto !important;
-            overflow-y: scroll !important;
+            overflow-y: scroll !important; /* Vynutí posuvník */
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
@@ -265,7 +265,7 @@
 
         <div class="fps-section-title">⚡ Výkon sestavy v herních testech</div>
 
-        <!-- SKUPINA 1 -->
+        <!-- SKUPINA 1: Kompetitivní hry -->
         <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
         <div class="fps-grid">
             
@@ -273,14 +273,14 @@
             <div class="fps-box">
                 <div class="game-name">Fortnite</div>
                 <div class="selector-row">
-                    <button class="selector-btn active" onclick="changeStat('fortnite', 'res', 'fhd', this)">FHD</button>
-                    <button class="selector-btn" onclick="changeStat('fortnite', 'res', '2k', this)">2K</button>
-                    <button class="selector-btn" onclick="changeStat('fortnite', 'res', '4k', this)">4K</button>
+                    <button class="selector-btn active" onclick="zmenFPS('fortnite', 'res', 'fhd', this)">FHD</button>
+                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'res', '2k', this)">2K</button>
+                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'res', '4k', this)">4K</button>
                 </div>
                 <div class="selector-row">
-                    <button class="selector-btn active" onclick="changeStat('fortnite', 'det', 'low', this)">Low</button>
-                    <button class="selector-btn" onclick="changeStat('fortnite', 'det', 'mid', this)">Mid</button>
-                    <button class="selector-btn" onclick="changeStat('fortnite', 'det', 'high', this)">High</button>
+                    <button class="selector-btn active" onclick="zmenFPS('fortnite', 'det', 'low', this)">Low</button>
+                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'det', 'mid', this)">Mid</button>
+                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'det', 'high', this)">High</button>
                 </div>
                 <div class="fps-display-container">
                     <span class="fps-counter" id="fps-fortnite">180+</span>
@@ -296,7 +296,6 @@
             <div class="fps-box no-rt">
                 <div class="game-name">Counter-Strike 2</div>
                 <div class="selector-row">
-                    <button class="selector-btn active" onclick="changeStat('cs2', 'res', 'fhd', this)">FHD</button>
-                    <button class="selector-btn" onclick="changeStat('cs2', 'res', '2k', this)">2K</button>
-                    <button class="selector-btn" onclick="changeStat('cs2', 'res', '4k', this)">4K</button>
-                </div>
+                    <button class="selector-btn active" onclick="zmenFPS('cs2', 'res', 'fhd', this)">FHD</button>
+                    <button class="selector-btn" onclick="zmenFPS('cs2', 'res', '2k', this)">2K</button>
+                    <button class="selector-btn" onclick="zmenFPS('cs2', 'res', '4k', this)">4K</button>

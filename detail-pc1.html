@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
-        /* ČISTÁ HTML5 / CSS3 ARCHITEKTURA - MAXIMÁLNÍ STABILITA BEZ JAVASCRIPTU */
+        /* ČISTÁ HTML5 / CSS3 ARCHITEKTURA BEZ JAVASCRIPTU */
         html, body {
             height: auto !important;
             overflow-y: scroll !important;
@@ -161,12 +161,12 @@
             margin-bottom: 15px;
         }
 
-        /* Schované inputy */
+        /* Skryté nativní radio inputy */
         input[type="radio"] {
             display: none !important;
         }
 
-        /* Řádky s popiskem a mačkacími tlačítky */
+        /* Styl pro řádky s přepínači */
         .control-row {
             display: flex;
             align-items: center;
@@ -196,7 +196,7 @@
             user-select: none;
         }
 
-        /* Výsledkový panel uprostřed karty */
+        /* Box pro výsledné velké číslo FPS */
         .fps-display-container {
             text-align: center;
             margin: 15px 0;
@@ -209,7 +209,7 @@
             justify-content: center;
         }
         .fps-counter-value {
-            display: none; /* Všechna čísla jsou schovaná, dokud se neklikne */
+            display: none; /* Schováno ve výchozím stavu */
             font-size: 32px;
             font-weight: 900;
             color: #0066ff;
@@ -226,7 +226,6 @@
             text-transform: uppercase;
         }
 
-        /* Spodní řádek pro Ray-Tracing */
         .rt-row {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -243,26 +242,27 @@
         .fps-box.no-rt .rt-label { color: #94a3b8; }
         .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
 
-        /* --- NEPRŮSTŘELNÁ CSS LOGIKA PRO VŠECH 5 HER --- */
-        
-        /* 1. FORTNITE */
+        /* --- FILTRACE VRSTEV POMOCÍ CSS --- */
+        /* Aktivní vzhled mačkacích tlačítek */
         #fhd-fort:checked ~ .control-row label[for="fhd-fort"], #k2-fort:checked ~ .control-row label[for="k2-fort"], #k4-fort:checked ~ .control-row label[for="k4-fort"],
         #low-fort:checked ~ .control-row label[for="low-fort"], #mid-fort:checked ~ .control-row label[for="mid-fort"], #high-fort:checked ~ .control-row label[for="high-fort"],
-        /* 2. CS2 */
+        
         #fhd-cs:checked ~ .control-row label[for="fhd-cs"], #k2-cs:checked ~ .control-row label[for="k2-cs"], #k4-cs:checked ~ .control-row label[for="k4-cs"],
         #low-cs:checked ~ .control-row label[for="low-cs"], #mid-cs:checked ~ .control-row label[for="mid-cs"], #high-cs:checked ~ .control-row label[for="high-cs"],
-        /* 3. MINECRAFT */
+        
         #fhd-mc:checked ~ .control-row label[for="fhd-mc"], #k2-mc:checked ~ .control-row label[for="k2-mc"], #k4-mc:checked ~ .control-row label[for="k4-mc"],
         #low-mc:checked ~ .control-row label[for="low-mc"], #mid-mc:checked ~ .control-row label[for="mid-mc"], #high-mc:checked ~ .control-row label[for="high-mc"],
-        /* 4. CYBERPUNK */
+        
         #fhd-cp:checked ~ .control-row label[for="fhd-cp"], #k2-cp:checked ~ .control-row label[for="k2-cp"], #k4-cp:checked ~ .control-row label[for="k4-cp"],
         #low-cp:checked ~ .control-row label[for="low-cp"], #mid-cp:checked ~ .control-row label[for="mid-cp"], #high-cp:checked ~ .control-row label[for="high-cp"],
-        /* 5. GTA V */
+        
         #fhd-gta:checked ~ .control-row label[for="fhd-gta"], #k2-gta:checked ~ .control-row label[for="k2-gta"], #k4-gta:checked ~ .control-row label[for="k4-gta"],
         #low-gta:checked ~ .control-row label[for="low-gta"], #mid-gta:checked ~ .control-row label[for="mid-gta"], #high-gta:checked ~ .control-row label[for="high-gta"] {
             background-color: #ffffff; color: #0066ff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 800;
         }
 
-        /* Vykreslení přesné kombinace FPS podle zakliknutých tlačítek */
+        /* Zobrazení správné kombinace čísla na základě zakliknutí obou řádků */
         #fhd-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-1, #fhd-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-2, #fhd-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-3,
         #k2-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-4, #k2-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-5, #k2-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-6,
+        #k4-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-7, #k4-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-8, #k4-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-9,
+        

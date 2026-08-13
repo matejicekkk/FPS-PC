@@ -73,13 +73,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             box-sizing: border-box;
         }
 
         .glass-panel {
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 30px;
+            padding: 25px 30px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             display: flex;
@@ -91,9 +91,9 @@
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 800;
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             text-align: center;
             color: #0f172a;
         }
@@ -101,8 +101,8 @@
         
         .subtitle {
             color: #64748b;
-            font-size: 16px;
-            margin: 0 0 25px 0;
+            font-size: 15px;
+            margin: 0 0 20px 0;
             text-align: center;
         }
 
@@ -111,14 +111,14 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .category-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            padding: 25px 10px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -126,15 +126,15 @@
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
-            aspect-ratio: 1.1 / 1;
+            aspect-ratio: 1.15 / 1;
             cursor: pointer;
             box-sizing: border-box;
         }
 
         .category-box:hover, .category-box.active {
             border-color: #0066ff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 102, 255, 0.15);
         }
         
         .category-box.active {
@@ -142,35 +142,72 @@
         }
 
         .category-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .category-price {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 800;
             color: #0066ff;
             background-color: #f0f6ff;
-            padding: 6px 10px;
+            padding: 5px 8px;
             border-radius: 6px;
             white-space: nowrap;
         }
 
+        /* Výběr grafické karty (NVIDIA / AMD) */
+        .gpu-selector-container {
+            display: none; /* Schované, dokud se neklikne na rozpočet */
+            margin-bottom: 15px;
+            gap: 15px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .gpu-btn {
+            padding: 10px 30px;
+            font-size: 14px;
+            font-weight: 800;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #ffffff;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .gpu-btn.nvidia { color: #44bb00; }
+        .gpu-btn.nvidia:hover, .gpu-btn.nvidia.active {
+            background-color: #44bb00;
+            border-color: #44bb00;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(68, 187, 0, 0.2);
+        }
+
+        .gpu-btn.amd { color: #ff0000; }
+        .gpu-btn.amd:hover, .gpu-btn.amd.active {
+            background-color: #ff0000;
+            border-color: #ff0000;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Panel pro zobrazení detailu PC */
         .pc-detail-container {
             width: 100%;
             background-color: #ffffff;
             border: 2px solid #0066ff;
             border-radius: 12px;
-            padding: 20px;
+            padding: 15px 20px;
             box-sizing: border-box;
             display: none; 
             animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -186,43 +223,43 @@
         }
 
         .pc-info-text h3 {
-            margin: 0 0 10px 0;
-            font-size: 22px;
+            margin: 0 0 8px 0;
+            font-size: 20px;
             color: #0f172a;
         }
 
         .pc-specs {
-            margin: 0 0 15px 0;
+            margin: 0;
             padding: 0;
             list-style: none;
-            font-size: 15px;
+            font-size: 14px;
             color: #475569;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 5px 20px;
+            gap: 4px 20px;
         }
 
         .pc-action {
             text-align: right;
-            min-width: 200px;
+            min-width: 180px;
         }
 
         .pc-final-price {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #0f172a;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .btn-order {
             display: inline-block;
             background-color: #0066ff;
             color: #ffffff;
-            padding: 12px 25px;
+            padding: 10px 20px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             border-radius: 6px;
             transition: background-color 0.2s;
         }
@@ -250,6 +287,7 @@
             <h1>Poctivé <span>Herní Mašiny</span></h1>
             <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
+            <!-- 4 Kategorie rozpočtu -->
             <div class="grid-container">
                 <div class="category-box" id="btn-kat1">
                     <span class="category-name">Základní výkon</span>
@@ -272,6 +310,13 @@
                 </div>
             </div>
 
+            <!-- Přidané přepínání GPU (NVIDIA / AMD) -->
+            <div id="gpu-selector" class="gpu-selector-container">
+                <button class="gpu-btn nvidia" id="btn-nvidia">NVIDIA</button>
+                <button class="gpu-btn amd" id="btn-amd">AMD / Radeon</button>
+            </div>
+
+            <!-- Panel pro zobrazení specifikací PC -->
             <div id="pc-detail" class="pc-detail-container">
                 <div class="pc-detail-content">
                     <div class="pc-info-text">
@@ -289,33 +334,5 @@
     </div>
 
     <script>
+        // Kompletní databáze rozdělená podle rozpočtu i podle značky grafiky
         const pcData = {
-            kat1: {
-                title: "FPS-PC Fortnite Starter",
-                price: "8 990 Kč",
-                mailSubject: "Zájem o Fortnite Starter (5-10k)",
-                specs: ["• CPU: Intel i5 6. generace", "• GPU: NVIDIA GTX 1060 6GB", "• RAM: 16GB DDR4", "• SSD: 500GB Rychlé SSD", "• Výkon: Fortnite (120+ FPS)"]
-            },
-            kat2: {
-                title: "FPS-PC GameGamer",
-                price: "13 490 Kč",
-                mailSubject: "Zájem o GameGamer (10-15k)",
-                specs: ["• CPU: AMD Ryzen 5 3600", "• GPU: NVIDIA GTX 1660 Super 6GB", "• RAM: 16GB DDR4 Gaming", "• SSD: 500GB NVMe M.2", "• Výkon: CS2, GTA V, Apex Legends"]
-            },
-            kat3: {
-                title: "FPS-PC UltraStreamer",
-                price: "22 990 Kč",
-                mailSubject: "Zájem o UltraStreamer (15-25k)",
-                specs: ["• CPU: AMD Ryzen 5 5600X", "• GPU: NVIDIA RTX 4060 8GB GDDR6", "• RAM: 32GB DDR4 High-Speed", "• SSD: 1TB NVMe Gen4 SSD", "• Výkon: Hraní nejnovějších her na High"]
-            },
-            kat4: {
-                title: "FPS-PC ApexKing",
-                price: "33 490 Kč",
-                mailSubject: "Zájem o ApexKing (25-35k)",
-                specs: ["• CPU: AMD Ryzen 7 7800X3D", "• GPU: NVIDIA RTX 4070 Super 12GB", "• RAM: 32GB DDR5 6000MHz", "• SSD: 2TB NVMe Gen4 Rychloběžný", "• Výkon: Brutální výkon v 1440p / 4K"]
-            }
-        };
-
-        function showPC(kategorieId, element) {
-            document.querySelectorAll('.category-box').forEach(box => box.classList.remove('active'));
-            element.classList.add('active');

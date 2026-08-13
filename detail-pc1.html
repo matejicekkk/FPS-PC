@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
-        /* ČISTÉ HTML/CSS - ŽÁDNÝ JAVASCRIPT */
         body {
             margin: 0;
             padding: 0;
@@ -129,7 +128,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Mřížka pro hry */
         .fps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -155,36 +153,55 @@
             color: #0f172a;
             text-align: center;
             margin-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
         }
 
-        /* Přehledná tabulka s FPS hodnotami */
-        .fps-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Styl pro posuvné lišty (Slidery) */
+        .slider-container {
             margin-bottom: 15px;
         }
 
-        .fps-table th {
-            text-align: left;
+        .slider-label-row {
+            display: flex;
+            justify-content: space-between;
             font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .slider-label-row span.active-val {
+            color: #0066ff;
+            background-color: #f0f6ff;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        /* Velké dynamické FPS počítadlo */
+        .fps-result-box {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+        }
+        .fps-counter {
+            font-size: 32px;
+            font-weight: 900;
+            color: #0066ff;
+            display: block;
+        }
+        .fps-label {
+            font-size: 11px;
+            font-weight: 600;
             color: #94a3b8;
             text-transform: uppercase;
-            padding-bottom: 8px;
         }
 
-        .fps-table td {
-            padding: 8px 0;
-            font-size: 14px;
-            border-bottom: 1px solid #f8fafc;
-        }
-
-        .td-res { font-weight: 700; color: #334155; }
-        .td-det { color: #64748b; font-style: italic; }
-        .td-fps { font-weight: 900; color: #0066ff; text-align: right; font-size: 16px; }
-
-        /* Speciální kolonka pro Ray-Tracing */
         .rt-row {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -236,7 +253,7 @@
             </div>
         </div>
 
-        <div class="fps-section-title">⚡ Výkon sestavy v herních testech</div>
+        <div class="fps-section-title">⚡ Posuvné testy výkonu sestavy</div>
 
         <!-- SKUPINA 1: Kompetitivní hry -->
         <div class="game-group-title">🏆 Kompetitivní & E-sport hry</div>
@@ -245,49 +262,38 @@
             <!-- Fortnite -->
             <div class="fps-box">
                 <div class="game-name">Fortnite</div>
-                <table class="fps-table">
-                    <thead>
-                        <tr>
-                            <th>Rozlišení</th>
-                            <th>Grafika</th>
-                            <th style="text-align: right;">Očekávané FPS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="td-res">FHD (1080p)</td><td class="td-det">Low / Perf</td><td class="td-fps">180+ FPS</td></tr>
-                        <tr><td class="td-res">2K (1440p)</td><td class="td-det">Medium</td><td class="td-fps">95 FPS</td></tr>
-                        <tr><td class="td-res">4K (2160p)</td><td class="td-det">High</td><td class="td-fps">35 FPS</td></tr>
-                    </tbody>
-                </table>
+                
+                <!-- Posuvník pro Rozlišení -->
+                <div class="slider-container">
+                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
+                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="přepniVýkon('fortnite')">
+                </div>
+
+                <!-- Posuvník pro Detaily -->
+                <div class="slider-container">
+                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
+                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="přepniVýkon('fortnite')">
+                </div>
+
+                <div class="fps-result-box">
+                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
+                    <span class="fps-label">Vypočítaný výkon</span>
+                </div>
+
                 <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
+                    <span class="rt-label">Ray-Tracing:</span>
                     <span class="rt-value">75 FPS (DLSS)</span>
                 </div>
             </div>
 
-            <!-- CS2 -->
+            <!-- Counter-Strike 2 -->
             <div class="fps-box no-rt">
                 <div class="game-name">Counter-Strike 2</div>
-                <table class="fps-table">
-                    <thead>
-                        <tr>
-                            <th>Rozlišení</th>
-                            <th>Grafika</th>
-                            <th style="text-align: right;">Očekávané FPS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="td-res">FHD (1080p)</td><td class="td-det">Low / Pro</td><td class="td-fps">290+ FPS</td></tr>
-                        <tr><td class="td-res">2K (1440p)</td><td class="td-det">Medium</td><td class="td-fps">165 FPS</td></tr>
-                        <tr><td class="td-res">4K (2160p)</td><td class="td-det">High</td><td class="td-fps">60 FPS</td></tr>
-                    </tbody>
-                </table>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing:</span>
-                    <span class="rt-value">Nepodporováno</span>
+                
+                <div class="slider-container">
+                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
+                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="přepniVýkon('cs2')">
                 </div>
-            </div>
 
-            <!-- Minecraft -->
-            <div class="fps-box">
-                <div class="game-name">Minecraft</div>
+                <div class="slider-container">
+                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>

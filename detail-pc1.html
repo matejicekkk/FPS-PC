@@ -32,10 +32,10 @@
             padding: 0 20px;
         }
 
-        /* Hlavní box rozdělený na dva sloupce */
+        /* Hlavní horní box */
         .product-container {
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 40px auto 20px auto;
             background-color: #ffffff;
             border-radius: 16px;
             border: 1px solid #e2e8f0;
@@ -44,7 +44,6 @@
             overflow: hidden;
         }
 
-        /* LEVÝ SLOUPEC: Tvůj obrázek test.webp */
         .product-left {
             flex: 1;
             background-color: #ffffff;
@@ -56,11 +55,10 @@
         }
         .product-left img {
             max-width: 100%;
-            max-height: 450px;
+            max-height: 400px;
             object-fit: contain;
         }
 
-        /* PRAVÝ SLOUPEC: Informace o hardwaru */
         .product-right {
             flex: 1;
             padding: 40px;
@@ -82,7 +80,7 @@
             list-style: none;
         }
         .specs-grid li {
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #f1f5f9;
             font-size: 16px;
             color: #475569;
@@ -117,6 +115,57 @@
             background-color: #36a000;
             box-shadow: 0 8px 20px rgba(68, 187, 0, 0.25);
         }
+
+        /* SPODNÍ SEKCE: Herní testy (5 čtverců vedle sebe) */
+        .fps-section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 40px 0 20px auto;
+            max-width: 1100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .fps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Přesně 5 sloupců */
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto 50px auto;
+        }
+
+        .fps-box {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            aspect-ratio: 1 / 1; /* Perfektní čtverce */
+            box-sizing: border-box;
+        }
+
+        .game-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .fps-counter {
+            font-size: 20px;
+            font-weight: 900;
+            color: #0066ff;
+            background-color: #f0f6ff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -130,17 +179,13 @@
     </header>
 
     <div class="container">
+        <!-- Hlavní parametry PC -->
         <div class="product-container">
-            
-            <!-- Vlevo: Obrázek -->
             <div class="product-left">
                 <img src="test.webp" alt="FPS-PC Sestava">
             </div>
-
-            <!-- Vpravo: Tvůj přesný hardwarový popis -->
             <div class="product-right">
                 <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                
                 <ul class="specs-grid">
                     <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
                     <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
@@ -148,11 +193,45 @@
                     <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
                     <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
                 </ul>
-
                 <span class="price-tag">7 490 Kč</span>
                 <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
             </div>
+        </div>
 
+        <!-- Nadpis pro herní testy -->
+        <div class="fps-section-title">Očekávaný výkon ve hrách</div>
+
+        <!-- Nová sekce: 5 čtverců s FPS -->
+        <div class="fps-grid">
+            <!-- Čtverec 1: Fortnite -->
+            <div class="fps-box">
+                <span class="game-name">Fortnite</span>
+                <span class="fps-counter">160+ FPS</span>
+            </div>
+
+            <!-- Čtverec 2: CS2 -->
+            <div class="fps-box">
+                <span class="game-name">Counter-Strike 2</span>
+                <span class="fps-counter">220+ FPS</span>
+            </div>
+
+            <!-- Čtverec 3: Minecraft -->
+            <div class="fps-box">
+                <span class="game-name">Minecraft</span>
+                <span class="fps-counter">350+ FPS</span>
+            </div>
+
+            <!-- Čtverec 4: GTA V -->
+            <div class="fps-box">
+                <span class="game-name">GTA V</span>
+                <span class="fps-counter">110+ FPS</span>
+            </div>
+
+            <!-- Čtverec 5: Roblox -->
+            <div class="fps-box">
+                <span class="game-name">Roblox</span>
+                <span class="fps-counter">60+ FPS (Cap)</span>
+            </div>
         </div>
     </div>
 

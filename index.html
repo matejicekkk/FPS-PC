@@ -16,7 +16,6 @@
         body {
             display: flex;
             flex-direction: column;
-            /* Tento kód si teď vezme tvou fotku image.png přímo z tvého GitHubu */
             background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), url('image.png');
             background-size: cover;
             background-position: center;
@@ -74,24 +73,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 20px;
             box-sizing: border-box;
         }
 
         .glass-panel {
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            padding: 30px;
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 1150px;
+            max-width: 1100px;
             width: 100%;
+            box-sizing: border-box;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             margin: 0 0 5px 0;
             text-align: center;
@@ -101,23 +101,25 @@
         
         .subtitle {
             color: #64748b;
-            font-size: 17px;
-            margin: 0 0 35px 0;
+            font-size: 16px;
+            margin: 0 0 25px 0;
             text-align: center;
         }
 
+        /* Mřížka rozcestníku kategorií */
         .grid-container {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .category-box {
             background-color: #ffffff;
-            border: 1px solid #e2e8f0;
+            border: 2px solid #e2e8f0;
             border-radius: 12px;
-            padding: 30px 10px;
+            padding: 20px 10px;
             text-decoration: none;
             color: inherit;
             display: flex;
@@ -127,30 +129,109 @@
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1.1 / 1;
+            cursor: pointer;
         }
 
-        .category-box:hover {
+        .category-box:hover, .category-box.active {
             border-color: #0066ff;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 102, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.15);
+        }
+        
+        .category-box.active {
+            background-color: #f8fafc;
         }
 
         .category-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .category-price {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             color: #0066ff;
             background-color: #f0f6ff;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
             white-space: nowrap;
+        }
+
+        /* Sekce pro zobrazení detailu vybraného PC */
+        .pc-detail-container {
+            width: 100%;
+            background-color: #ffffff;
+            border: 2px solid #0066ff;
+            border-radius: 12px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: none; /* Schované, dokud se neklikne */
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pc-detail-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pc-info-text {
+            flex-grow: 1;
+        }
+
+        .pc-info-text h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #0f172a;
+        }
+
+        .pc-specs {
+            margin: 0 0 15px 0;
+            padding: 0;
+            list-style: none;
+            font-size: 15px;
+            color: #475569;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px 20px;
+        }
+
+        .pc-action {
+            text-align: right;
+            min-width: 200px;
+        }
+
+        .pc-final-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background-color: #0066ff;
+            color: #ffffff;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-order:hover {
+            background-color: #0052cc;
         }
     </style>
 </head>
@@ -172,32 +253,79 @@
             <h1>Poctivé <span>Herní Mašiny</span></h1>
             <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
+            <!-- 4 Kategorie (teď jako klikací divy s funkcí) -->
             <div class="grid-container">
-                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 5-10k" class="category-box">
+                <div class="category-box" onclick="showPC('kat1', this)">
                     <span class="category-name">Základní výkon</span>
                     <span class="category-price">5 000 - 10 000 Kč</span>
-                </a>
+                </div>
 
-                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 10-15k" class="category-box">
+                <div class="category-box" onclick="showPC('kat2', this)">
                     <span class="category-name">Dostupný gaming</span>
                     <span class="category-price">10 000 - 15 000 Kč</span>
-                </a>
+                </div>
 
-                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 15-25k" class="category-box">
+                <div class="category-box" onclick="showPC('kat3', this)">
                     <span class="category-name">Pokročilý výkon</span>
                     <span class="category-price">15 000 - 25 000 Kč</span>
                 </a>
 
-                <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 25-35k" class="category-box">
+                <div class="category-box" onclick="showPC('kat4', this)">
                     <span class="category-name">High-end mašiny</span>
                     <span class="category-price">25 000 - 35 000 Kč</span>
-                </a>
+                </div>
             </div>
+
+            <!-- Tady se dynamicky otevírají detaily počítačů -->
+            <div id="pc-detail" class="pc-detail-container">
+                <div class="pc-detail-content">
+                    <div class="pc-info-text">
+                        <h3 id="pc-title">Název PC</h3>
+                        <ul class="pc-specs" id="pc-specs">
+                            <!-- Specifikace se doplní přes JavaScript -->
+                        </ul>
+                    </div>
+                    <div class="pc-action">
+                        <span class="pc-final-price" id="pc-price">0 Kč</span>
+                        <a href="#" id="pc-link" class="btn-order">Mám zájem</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-</body>
-</html>
+    <!-- JavaScript pro inteligentní přepínání bez scrollování -->
+    <script>
+        // Databáze tvých herních sestav
+        const pcData = {
+            kat1: {
+                title: "FPS-PC Fortnite Starter",
+                price: "8 990 Kč",
+                mailSubject: "Zájem o Fortnite Starter (5-10k)",
+                specs: [
+                    "• CPU: Intel i5 6. generace",
+                    "• GPU: NVIDIA GTX 1060 6GB",
+                    "• RAM: 16GB DDR4",
+                    "• SSD: 500GB Rychlé SSD",
+                    "• Výkon: Fortnite (120+ FPS na Performance)"
+                ]
+            },
+            kat2: {
+                title: "FPS-PC GameGamer",
+                price: "13 490 Kč",
+                mailSubject: "Zájem o GameGamer (10-15k)",
+                specs: [
+                    "• CPU: AMD Ryzen 5 3600",
+                    "• GPU: NVIDIA GTX 1660 Super 6GB",
+                    "• RAM: 16GB DDR4 Gaming",
+                    "• SSD: 500GB NVMe M.2",
+                    "• Výkon: CS2, GTA V, Apex Legends na plynulé detaily"
+                ]
+            },
+            kat3: {
+                title: "FPS-PC UltraStreamer",
+                price: "22 990 Kč",
 
 
 

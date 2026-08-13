@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
-        body {
+        html, body {
+            height: auto !important;
+            overflow-y: scroll !important;
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
             color: #1e293b;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow-y: auto; /* OPRAVA: Povolí posuvník nahoru a dolů */
         }
 
         header {
@@ -28,7 +29,7 @@
         .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
 
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -111,26 +112,37 @@
             font-size: 24px;
             font-weight: 800;
             color: #0f172a;
-            margin: 50px auto 20px auto;
-            max-width: 1200px;
+            margin: 50px auto 10px auto;
+            max-width: 1100px;
             text-transform: uppercase;
-            text-align: center;
+            text-align: left;
+            border-left: 4px solid #0066ff;
+            padding-left: 10px;
         }
 
-        /* OPRAVA MŘÍŽKY: Flexibilní rozvržení, které se přizpůsobí monitoru a nic neschová */
+        .game-group-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #64748b;
+            margin: 20px auto 15px auto;
+            max-width: 1100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             max-width: 1100px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 30px auto;
         }
 
         .fps-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
             border-radius: 14px;
-            padding: 15px 10px;
+            padding: 20px 15px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -141,11 +153,11 @@
         .fps-box:hover { border-color: #0066ff; }
 
         .game-name {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .selector-row {
@@ -160,9 +172,9 @@
             flex: 1;
             border: none;
             background: none;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
-            padding: 5px 2px;
+            padding: 6px 2px;
             cursor: pointer;
             border-radius: 4px;
             color: #64748b;
@@ -176,14 +188,14 @@
 
         .fps-display-container {
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         .fps-counter {
-            font-size: 26px;
+            font-size: 32px;
             font-weight: 900;
             color: #0066ff;
             display: block;
@@ -197,8 +209,8 @@
 
         .rt-container {
             border-top: 1px dashed #e2e8f0;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
             text-align: center;
         }
         .rt-badge {
@@ -210,9 +222,8 @@
             border-radius: 4px;
             display: inline-block;
             margin-bottom: 4px;
-            letter-spacing: 0.5px;
         }
-        .fps-box.no-rt .rt-badge { color: #94a3b8; }
+        .fps-box.no-rt .rt-badge { color: #94a3b8; background-color: #f1f5f9; }
         
         .rt-value {
             font-size: 13px;
@@ -233,6 +244,7 @@
     </header>
 
     <div class="container">
+        <!-- Hlavní parametry PC -->
         <div class="product-container">
             <div class="product-left">
                 <img src="test.webp" alt="FPS-PC Sestava">
@@ -251,11 +263,14 @@
             </div>
         </div>
 
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
+        <div class="fps-section-title">⚡ Výkon sestavy v herních testech</div>
 
+        <!-- SKUPINA 1 -->
+        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
         <div class="fps-grid">
             
-            <div class="fps-box" id="game-fortnite">
+            <!-- Fortnite -->
+            <div class="fps-box">
                 <div class="game-name">Fortnite</div>
                 <div class="selector-row">
                     <button class="selector-btn active" onclick="changeStat('fortnite', 'res', 'fhd', this)">FHD</button>
@@ -277,15 +292,11 @@
                 </div>
             </div>
 
-            <div class="fps-box no-rt" id="game-cs2">
-                <div class="game-name">CS2</div>
+            <!-- CS2 -->
+            <div class="fps-box no-rt">
+                <div class="game-name">Counter-Strike 2</div>
                 <div class="selector-row">
                     <button class="selector-btn active" onclick="changeStat('cs2', 'res', 'fhd', this)">FHD</button>
                     <button class="selector-btn" onclick="changeStat('cs2', 'res', '2k', this)">2K</button>
                     <button class="selector-btn" onclick="changeStat('cs2', 'res', '4k', this)">4K</button>
-                </div>
-                <div class="selector-row">
-                    <button class="selector-btn active" onclick="changeStat('cs2', 'det', 'low', this)">Low</button>
-                    <button class="selector-btn" onclick="changeStat('cs2', 'det', 'mid', this)">Mid</button>
-                    <button class="selector-btn" onclick="changeStat('cs2', 'det', 'high', this)">High</button>
                 </div>

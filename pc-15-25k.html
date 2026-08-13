@@ -1,153 +1,267 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Sestavy 15 000 - 25 000 Kč</title>
-    <style>
-        /* === ZÁKLADNÍ STYLY === */
-        body { margin: 0; padding: 0; background-color: #f8fafc; color: #1e293b; font-family: 'Segoe UI', Roboto, sans-serif; }
-        
-        header { 
-            background-color: #ffffff; 
-            padding: 15px 40px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #e2e8f0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; }
-        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
-        
-        .container { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-        
-        h2 { font-size: 32px; text-align: center; margin-bottom: 40px; color: #0f172a; }
-        h2 span { color: #0066ff; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS-PC | Sestavy 15 000 - 25 000 Kč</title>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+    }
 
-        /* === MŘÍŽKA PŘESNĚ PRO 4 PC V JEDNÉ ŘADĚ === */
-        .compare-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 20px; 
-        }
+    header {
+      background-color: #ffffff;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
 
-        /* Na malých obrazovkách a mobilech se přeskládají pod sebe */
-        @media (max-width: 900px) {
-            .compare-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 500px) {
-            .compare-grid { grid-template-columns: 1fr; }
-        }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
 
-        /* === STYLY KARET === */
-        .pc-card {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 20px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            box-sizing: border-box;
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
+    .logo-fps {
+      font-size: 24px;
+      font-weight: 900;
+      color: #1e293b;
+      border: 3px solid #1e293b;
+      padding: 2px 8px;
+      text-transform: uppercase;
+    }
 
-        .pc-card:hover { transform: translateY(-5px); }
-        .pc-card:active { transform: scale(0.96) translateY(0); }
+    .logo-pc {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0066ff;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
 
-        /* NVIDIA */
-        .pc-card.nvidia { border-color: #76b900; }
-        .pc-card.nvidia:hover { box-shadow: 0 12px 25px rgba(118, 185, 0, 0.15); }
-        .pc-card.nvidia .price { color: #16a34a; background-color: #f0fdf4; }
-        .pc-card.nvidia .badge-brand { background-color: #76b900; color: white; }
+    .btn-back {
+      text-decoration: none;
+      color: #0066ff;
+      font-weight: 700;
+      font-size: 15px;
+    }
 
-        /* AMD */
-        .pc-card.amd { border-color: #ed1c24; }
-        .pc-card.amd:hover { box-shadow: 0 12px 25px rgba(237, 28, 36, 0.15); }
-        .pc-card.amd .price { color: #dc2626; background-color: #fef2f2; }
-        .pc-card.amd .badge-brand { background-color: #ed1c24; color: white; }
+    .container {
+      max-width: 1200px; /* Rozšířeno pro 4 karty vedle sebe */
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
 
-        .badge-brand {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-bottom-right-radius: 12px;
-            text-transform: uppercase;
-        }
+    .category-main-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+    
+    .category-main-title span {
+      color: #0066ff;
+    }
 
-        .pc-img { width: 100%; height: 140px; margin: 15px 0; display: flex; align-items: center; justify-content: center; }
-        .pc-img img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+    /* MŘÍŽKA PŘESNĚ PRO 4 PC V JEDNÉ ŘADĚ */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
 
-        .card-title { font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 6px; }
-        .card-specs { font-size: 12px; color: #64748b; margin-bottom: 15px; font-weight: 500; }
-        .price { font-size: 16px; font-weight: 900; padding: 6px 16px; border-radius: 8px; white-space: nowrap; margin-top: auto; }
-    </style>
+    @media (max-width: 1024px) {
+      .compare-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    /* KARTA PC */
+    .pc-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 35px 20px 25px 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pc-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ZNAČKA V ROHU (AMD / NVIDIA) */
+    .badge-brand {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-bottom-right-radius: 12px;
+      z-index: 10;
+    }
+
+    /* NVIDIA STYL */
+    .pc-card.nvidia {
+      border: 2px solid #76b900;
+      box-shadow: 0 0 15px rgba(118, 185, 0, 0.1);
+    }
+    .pc-card.nvidia .badge-brand {
+      background-color: #76b900;
+    }
+    .pc-card.nvidia:hover {
+      box-shadow: 0 8px 25px rgba(118, 185, 0, 0.25);
+    }
+    .pc-card.nvidia .pc-price-box {
+      color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    /* AMD STYL */
+    .pc-card.amd {
+      border: 2px solid #ed1c24;
+      box-shadow: 0 0 15px rgba(237, 28, 36, 0.1);
+    }
+    .pc-card.amd .badge-brand {
+      background-color: #ed1c24;
+    }
+    .pc-card.amd:hover {
+      box-shadow: 0 8px 25px rgba(237, 28, 36, 0.25);
+    }
+    .pc-card.amd .pc-price-box {
+      color: #dc2626;
+      background: #fef2f2;
+    }
+
+    /* OBRÁZEK A TEXTY */
+    .pc-img {
+      width: 100%;
+      height: 140px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pc-img img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .pc-info {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+
+    .card-specs {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* CENA */
+    .pc-price-box {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 900;
+      width: 100%;
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="index.html" class="btn-back">← Zpět na úvod</a>
-    </header>
 
-    <div class="container">
-        <h2>Sestavy <span>15 000 - 25 000 Kč</span></h2>
-        
-        <div class="compare-grid">
-            
-            <!-- PC 1: NVIDIA (18 500 Kč) -->
-            <a href="detail-15-25k1.html" class="pc-card nvidia">
-                <div class="badge-brand">NVIDIA</div>
-                <div class="pc-img"><img src="test.webp" alt="Herní PC 1"></div>
-                <div class="card-title">FPS Pro - RTX 4060</div>
-                <div class="card-specs">Intel i5-12400F • 16GB RAM</div>
-                <div class="price">18 500 Kč</div>
-            </a>
+  <header>
+    <a href="index.html" class="logo-container">
+      <span class="logo-fps">FPS</span>
+      <span class="logo-pc">PC</span>
+    </a>
+    <a href="index.html" class="btn-back">← Zpět na úvod</a>
+  </header>
 
-            <!-- PC 2: NVIDIA (Tento je ten za 22 990 Kč) -->
-            <a href="detail-pc2.html" class="pc-card nvidia">
-                <div class="badge-brand">NVIDIA</div>
-                <!-- Vložena tvoje existující fotka 22kpc.webp -->
-                <div class="pc-img"><img src="22kpc.webp" alt="Herní PC 2"></div>
-                <div class="card-title">Streamer - RTX 4060 Ti</div>
-                <div class="card-specs">Intel i5-13400F • 32GB RAM</div>
-                <div class="price">22 990 Kč</div>
-            </a>
+  <div class="container">
+    <h2 class="category-main-title">Sestavy <span>15 000 - 25 000 Kč</span></h2>
 
-            <!-- PC 3: AMD (16 990 Kč) -->
-            <a href="detail-pc3.html" class="pc-card amd">
-                <div class="badge-brand">AMD</div>
-                <div class="pc-img"><img src="test.webp" alt="Herní PC 3"></div>
-                <div class="card-title">Radeon Red - RX 7600</div>
-                <div class="card-specs">Ryzen 5 5600 • 16GB RAM</div>
-                <div class="price">16 990 Kč</div>
-            </a>
-
-            <!-- PC 4: AMD (21 990 Kč) -->
-            <a href="detail-pc4.html" class="pc-card amd">
-                <div class="badge-brand">AMD</div>
-                <div class="pc-img"><img src="test.webp" alt="Herní PC 4"></div>
-                <div class="card-title">FPS Ultra - RX 6700 XT</div>
-                <div class="card-specs">Ryzen 5 7600 • 32GB RAM</div>
-                <div class="price">21 990 Kč</div>
-            </a>
-
+    <div class="compare-grid">
+      
+      <!-- PC 1: NVIDIA (18 500 Kč) -->
+      <a href="detail-15-25k1.html" class="pc-card nvidia">
+        <div class="badge-brand">NVIDIA</div>
+        <div class="pc-img"><img src="test.webp" alt="Herní PC 1"></div>
+        <div class="pc-info">
+          <h3 class="card-title">FPS Pro - RTX 4060</h3>
+          <p class="card-specs">Intel i5-12400F • 16GB RAM</p>
         </div>
+        <div class="pc-price-box">18 500 Kč</div>
+      </a>
+
+      <!-- PC 2: NVIDIA (22 990 Kč) -->
+      <a href="detail-pc2.html" class="pc-card nvidia">
+        <div class="badge-brand">NVIDIA</div>
+        <div class="pc-img"><img src="22kpc.webp" alt="Herní PC 2"></div>
+        <div class="pc-info">
+          <h3 class="card-title">Streamer - RTX 4060 Ti</h3>
+          <p class="card-specs">Intel i5-13400F • 32GB RAM</p>
+        </div>
+        <div class="pc-price-box">22 990 Kč</div>
+      </a>
+
+      <!-- PC 3: AMD (16 990 Kč) -->
+      <a href="detail-pc3.html" class="pc-card amd">
+        <div class="badge-brand">AMD</div>
+        <div class="pc-img"><img src="test.webp" alt="Herní PC 3"></div>
+        <div class="pc-info">
+          <h3 class="card-title">Radeon Red - RX 7600</h3>
+          <p class="card-specs">Ryzen 5 5600 • 16GB RAM</p>
+        </div>
+        <div class="pc-price-box">16 990 Kč</div>
+      </a>
+
+      <!-- PC 4: AMD (21 990 Kč) -->
+      <a href="detail-pc4.html" class="pc-card amd">
+        <div class="badge-brand">AMD</div>
+        <div class="pc-img"><img src="test.webp" alt="Herní PC 4"></div>
+        <div class="pc-info">
+          <h3 class="card-title">FPS Ultra - RX 6700 XT</h3>
+          <p class="card-specs">Ryzen 5 7600 • 32GB RAM</p>
+        </div>
+        <div class="pc-price-box">21 990 Kč</div>
+      </a>
+
     </div>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS-PC | Detail sestavy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .logo-container { display: flex; align-items: center; text-decoration: none; }
+        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; }
+        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
+        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hlavní box rozdělený na dva sloupce */
+        .product-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* LEVÝ SLOUPEC: Tvůj obrázek test.webp */
+        .product-left {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-right: 1px solid #e2e8f0;
+        }
+        .product-left img {
+            max-width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+        }
+
+        /* PRAVÝ SLOUPEC: Informace o hardwaru */
+        .product-right {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #0f172a;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+        }
+
+        .specs-grid {
+            margin: 0 0 30px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .specs-grid li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 16px;
+            color: #475569;
+        }
+        .specs-grid strong {
+            color: #0f172a;
+        }
+
+        .price-tag {
+            font-size: 32px;
+            font-weight: 800;
+            color: #44bb00;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .btn-buy {
+            display: block;
+            text-align: center;
+            background-color: #44bb00;
+            color: #ffffff;
+            padding: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-buy:hover {
+            background-color: #36a000;
+            box-shadow: 0 8px 20px rgba(68, 187, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <div class="logo-fps">FPS</div>
+            <div class="logo-pc">PC</div>
+        </a>
+        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
+    </header>
+
+    <div class="container">
+        <div class="product-container">
+            
+            <!-- Vlevo: Obrázek -->
+            <div class="product-left">
+                <img src="test.webp" alt="FPS-PC Sestava">
+            </div>
+
+            <!-- Vpravo: Tvůj přesný hardwarový popis -->
+            <div class="product-right">
+                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
+                
+                <ul class="specs-grid">
+                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
+                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
+                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
+                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
+                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
+                </ul>
+
+                <span class="price-tag">7 490 Kč</span>
+                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Detail sestavy</title>
+    <title>FPS-PC | Profesionální konfigurátor sestavy</title>
     <style>
+        /* Moderní CSS reset a globální styly */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
         html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
+            min-height: 100%;
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
             color: #1e293b;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         header {
@@ -22,32 +27,35 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
+        
         .logo-container { display: flex; align-items: center; text-decoration: none; }
         .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
         .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
+        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; transition: color 0.2s; }
+        .btn-back:hover { color: #0052cc; }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            padding-bottom: 80px;
+            padding: 40px 20px 80px 20px;
         }
 
+        /* Horní panel s detailem produktu */
         .product-container {
-            max-width: 1100px;
-            margin: 40px auto 20px auto;
             background-color: #ffffff;
             border-radius: 16px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             display: flex;
+            flex-wrap: wrap;
             overflow: hidden;
+            margin-bottom: 40px;
         }
 
         .product-left {
-            flex: 1;
+            flex: 1 1 450px;
             background-color: #ffffff;
             display: flex;
             align-items: center;
@@ -57,12 +65,13 @@
         }
         .product-left img {
             max-width: 100%;
-            max-height: 400px;
+            height: auto;
+            max-height: 380px;
             object-fit: contain;
         }
 
         .product-right {
-            flex: 1;
+            flex: 1 1 450px;
             padding: 40px;
             display: flex;
             flex-direction: column;
@@ -73,7 +82,7 @@
             font-size: 28px;
             color: #0f172a;
             margin: 0 0 20px 0;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .specs-grid {
@@ -107,407 +116,139 @@
             font-size: 18px;
             border-radius: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, transform 0.1s;
         }
+        .btn-buy:hover { background-color: #36a000; }
+        .btn-buy:active { transform: scale(0.98); }
 
+        /* Sekce herních testů */
         .fps-section-title {
             font-size: 24px;
             font-weight: 800;
             color: #0f172a;
-            margin: 50px auto 10px auto;
-            max-width: 1100px;
+            margin: 20px 0;
             text-transform: uppercase;
-            text-align: left;
             border-left: 4px solid #0066ff;
-            padding-left: 10px;
+            padding-left: 12px;
         }
 
         .game-group-title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #64748b;
-            margin: 30px auto 15px auto;
-            max-width: 1100px;
+            margin: 30px 0 15px 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
+        /* Profi responzivní Grid, který se nikdy nerozbije */
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
+            margin-bottom: 40px;
         }
 
         .fps-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            box-sizing: border-box;
-            min-height: 250px;
-        }
-        .fps-box:hover { border-color: #0066ff; }
-
-        .game-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .slider-container {
-            margin-bottom: 12px;
-        }
-
-        .slider-label-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
-
-        .range-slider {
-            width: 100%;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-
-        .fps-result-box {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8fafc;
-            border-radius: 8px;
-        }
-        .fps-counter {
-            font-size: 32px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-        }
-        .fps-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        .rt-row {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
-        .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
-
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-        .fps-box.no-rt .rt-label { color: #94a3b8; }
-        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
-    </header>
-
-    <div class="container">
-        <!-- Hlavní parametry PC -->
-        <div class="product-container">
-            <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
-            </div>
-            <div class="product-right">
-                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                <ul class="specs-grid">
-                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-                </ul>
-                <span class="price-tag">7 490 Kč</span>
-                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
-            </div>
-        </div>
-
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
-
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="vypocitejFPS('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Detail sestavy</title>
-    <style>
-        html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            padding-bottom: 80px;
-        }
-
-        .product-container {
-            max-width: 1100px;
-            margin: 40px auto 20px auto;
-            background-color: #ffffff;
             border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            overflow: hidden;
-        }
-
-        .product-left {
-            flex: 1;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-        }
-        .product-left img {
-            max-width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-        }
-
-        .product-right {
-            flex: 1;
-            padding: 40px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-
-        h1 {
-            font-size: 28px;
-            color: #0f172a;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
+        .fps-box:hover { 
+            border-color: #0066ff; 
+            box-shadow: 0 10px 20px -5px rgba(0,102,255,0.05);
         }
-
-        .specs-grid {
-            margin: 0 0 30px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .specs-grid li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 16px;
-            color: #475569;
-        }
-
-        .price-tag {
-            font-size: 32px;
-            font-weight: 800;
-            color: #44bb00;
-            margin-bottom: 25px;
-            display: block;
-        }
-
-        .btn-buy {
-            display: block;
-            text-align: center;
-            background-color: #44bb00;
-            color: #ffffff;
-            padding: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            border-radius: 8px;
-            text-transform: uppercase;
-        }
-
-        .fps-section-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 50px auto 10px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            text-align: left;
-            border-left: 4px solid #0066ff;
-            padding-left: 10px;
-        }
-
-        .game-group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #64748b;
-            margin: 30px auto 15px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .fps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .fps-box {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            box-sizing: border-box;
-            min-height: 250px;
-        }
-        .fps-box:hover { border-color: #0066ff; }
 
         .game-name {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin-bottom: 15px;
+            margin: 0 0 20px 0;
         }
 
         .slider-container {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .slider-label-row {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             color: #64748b;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .slider-label-row span.active-val {
             color: #0066ff;
             background-color: #f0f6ff;
-            padding: 1px 6px;
+            padding: 2px 8px;
             border-radius: 4px;
         }
 
         .range-slider {
             width: 100%;
-            margin: 5px 0;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
             cursor: pointer;
         }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0066ff;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
 
+        /* Výsledkový panel s FPS */
         .fps-result-box {
             text-align: center;
-            margin: 15px 0;
-            padding: 10px;
+            margin: 20px 0;
+            padding: 15px;
             background-color: #f8fafc;
-            border-radius: 8px;
+            border-radius: 12px;
+            border: 1px solid #f1f5f9;
         }
         .fps-counter {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
             color: #0066ff;
             display: block;
+            line-height: 1;
+            margin-bottom: 4px;
         }
         .fps-label {
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             color: #94a3b8;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
+        /* Spodní řádek pro Ray-Tracing */
         .rt-row {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
+            border-radius: 10px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto;
+            margin-top: auto; /* Tlačí RT box vždy na dno karty */
         }
         .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
         .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
@@ -518,6 +259,11 @@
         }
         .fps-box.no-rt .rt-label { color: #94a3b8; }
         .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .product-left { border-right: none; border-bottom: 1px solid #e2e8f0; }
+            header { padding: 15px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -531,10 +277,10 @@
     </header>
 
     <div class="container">
-        <!-- Hlavní parametry PC -->
+        <!-- Hlavní produktová specifikace -->
         <div class="product-container">
             <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
+                <img src="test.webp" alt="FPS-PC herní sestava">
             </div>
             <div class="product-right">
                 <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
@@ -550,10 +296,10 @@
             </div>
         </div>
 
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
+        <div class="fps-section-title">⚡ Živé výkonnostní testy hardwaru</div>
 
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
+        <!-- SKUPINA 1 -->
+        <div class="game-group-title">🏆 Kompetitivní & E-sport tituly</div>
         <div class="fps-grid">
             
             <!-- Fortnite -->
@@ -561,910 +307,4 @@
                 <div class="game-name">Fortnite</div>
                 <div class="slider-container">
                     <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="vypocitejFPS('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Detail sestavy</title>
-    <style>
-        html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            padding-bottom: 80px;
-        }
-
-        .product-container {
-            max-width: 1100px;
-            margin: 40px auto 20px auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            overflow: hidden;
-        }
-
-        .product-left {
-            flex: 1;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-        }
-        .product-left img {
-            max-width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-        }
-
-        .product-right {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 28px;
-            color: #0f172a;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
-        }
-
-        .specs-grid {
-            margin: 0 0 30px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .specs-grid li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 16px;
-            color: #475569;
-        }
-
-        .price-tag {
-            font-size: 32px;
-            font-weight: 800;
-            color: #44bb00;
-            margin-bottom: 25px;
-            display: block;
-        }
-
-        .btn-buy {
-            display: block;
-            text-align: center;
-            background-color: #44bb00;
-            color: #ffffff;
-            padding: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            border-radius: 8px;
-            text-transform: uppercase;
-        }
-
-        .fps-section-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 50px auto 10px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            text-align: left;
-            border-left: 4px solid #0066ff;
-            padding-left: 10px;
-        }
-
-        .game-group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #64748b;
-            margin: 30px auto 15px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .fps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .fps-box {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            box-sizing: border-box;
-            min-height: 250px;
-        }
-        .fps-box:hover { border-color: #0066ff; }
-
-        .game-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .slider-container {
-            margin-bottom: 12px;
-        }
-
-        .slider-label-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
-
-        .range-slider {
-            width: 100%;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-
-        .fps-result-box {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8fafc;
-            border-radius: 8px;
-        }
-        .fps-counter {
-            font-size: 32px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-        }
-        .fps-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        .rt-row {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
-        .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
-
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-        .fps-box.no-rt .rt-label { color: #94a3b8; }
-        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
-    </header>
-
-    <div class="container">
-        <!-- Hlavní parametry PC -->
-        <div class="product-container">
-            <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
-            </div>
-            <div class="product-right">
-                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                <ul class="specs-grid">
-                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-                </ul>
-                <span class="price-tag">7 490 Kč</span>
-                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
-            </div>
-        </div>
-
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
-
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="vypocitejFPS('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Detail sestavy</title>
-    <style>
-        html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            padding-bottom: 80px;
-        }
-
-        .product-container {
-            max-width: 1100px;
-            margin: 40px auto 20px auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            overflow: hidden;
-        }
-
-        .product-left {
-            flex: 1;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-        }
-        .product-left img {
-            max-width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-        }
-
-        .product-right {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 28px;
-            color: #0f172a;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
-        }
-
-        .specs-grid {
-            margin: 0 0 30px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .specs-grid li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 16px;
-            color: #475569;
-        }
-
-        .price-tag {
-            font-size: 32px;
-            font-weight: 800;
-            color: #44bb00;
-            margin-bottom: 25px;
-            display: block;
-        }
-
-        .btn-buy {
-            display: block;
-            text-align: center;
-            background-color: #44bb00;
-            color: #ffffff;
-            padding: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            border-radius: 8px;
-            text-transform: uppercase;
-        }
-
-        .fps-section-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 50px auto 10px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            text-align: left;
-            border-left: 4px solid #0066ff;
-            padding-left: 10px;
-        }
-
-        .game-group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #64748b;
-            margin: 30px auto 15px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .fps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .fps-box {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            box-sizing: border-box;
-            min-height: 250px;
-        }
-        .fps-box:hover { border-color: #0066ff; }
-
-        .game-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .slider-container {
-            margin-bottom: 12px;
-        }
-
-        .slider-label-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
-
-        .range-slider {
-            width: 100%;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-
-        .fps-result-box {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8fafc;
-            border-radius: 8px;
-        }
-        .fps-counter {
-            font-size: 32px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-        }
-        .fps-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        .rt-row {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
-        .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
-
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-        .fps-box.no-rt .rt-label { color: #94a3b8; }
-        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
-    </header>
-
-    <div class="container">
-        <!-- Hlavní parametry PC -->
-        <div class="product-container">
-            <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
-            </div>
-            <div class="product-right">
-                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                <ul class="specs-grid">
-                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-                </ul>
-                <span class="price-tag">7 490 Kč</span>
-                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
-            </div>
-        </div>
-
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
-
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="vypocitejFPS('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS-PC | Detail sestavy</title>
-    <style>
-        html, body {
-            height: auto !important;
-            overflow-y: scroll !important;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-
-        header {
-            background-color: #ffffff;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
-        .logo-fps { font-size: 26px; font-weight: 900; color: #334155; border: 3px solid #334155; padding: 2px 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-pc { font-size: 26px; font-weight: 900; color: #0066ff; text-transform: uppercase; margin-left: 8px; }
-        .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            padding-bottom: 80px;
-        }
-
-        .product-container {
-            max-width: 1100px;
-            margin: 40px auto 20px auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            display: flex;
-            overflow: hidden;
-        }
-
-        .product-left {
-            flex: 1;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-        }
-        .product-left img {
-            max-width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-        }
-
-        .product-right {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 28px;
-            color: #0f172a;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
-        }
-
-        .specs-grid {
-            margin: 0 0 30px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .specs-grid li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 16px;
-            color: #475569;
-        }
-
-        .price-tag {
-            font-size: 32px;
-            font-weight: 800;
-            color: #44bb00;
-            margin-bottom: 25px;
-            display: block;
-        }
-
-        .btn-buy {
-            display: block;
-            text-align: center;
-            background-color: #44bb00;
-            color: #ffffff;
-            padding: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            border-radius: 8px;
-            text-transform: uppercase;
-        }
-
-        .fps-section-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 50px auto 10px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            text-align: left;
-            border-left: 4px solid #0066ff;
-            padding-left: 10px;
-        }
-
-        .game-group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #64748b;
-            margin: 30px auto 15px auto;
-            max-width: 1100px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .fps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .fps-box {
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            box-sizing: border-box;
-            min-height: 250px;
-        }
-        .fps-box:hover { border-color: #0066ff; }
-
-        .game-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .slider-container {
-            margin-bottom: 12px;
-        }
-
-        .slider-label-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 4px;
-        }
-        .slider-label-row span.active-val {
-            color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 1px 6px;
-            border-radius: 4px;
-        }
-
-        .range-slider {
-            width: 100%;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-
-        .fps-result-box {
-            text-align: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8fafc;
-            border-radius: 8px;
-        }
-        .fps-counter {
-            font-size: 32px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-        }
-        .fps-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        .rt-row {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .rt-label { font-size: 12px; font-weight: 700; color: #16a34a; }
-        .rt-value { font-size: 14px; font-weight: 800; color: #15803d; }
-
-        .fps-box.no-rt .rt-row {
-            background-color: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-        .fps-box.no-rt .rt-label { color: #94a3b8; }
-        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="logo-container">
-            <div class="logo-fps">FPS</div>
-            <div class="logo-pc">PC</div>
-        </a>
-        <a href="pc-5-10k.html" class="btn-back">← Zpět do nabídky</a>
-    </header>
-
-    <div class="container">
-        <!-- Hlavní parametry PC -->
-        <div class="product-container">
-            <div class="product-left">
-                <img src="test.webp" alt="FPS-PC Sestava">
-            </div>
-            <div class="product-right">
-                <h1>Herní PC RTX 5060 8GB | Ryzen 5 5600</h1>
-                <ul class="specs-grid">
-                    <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 5060 8GB</strong></li>
-                    <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
-                    <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-                    <li>💾 Pevný disk: <strong>1TB NVMe SSD</strong></li>
-                    <li>💿 Operační systém: <strong>Windows 11 Home</strong></li>
-                </ul>
-                <span class="price-tag">7 490 Kč</span>
-                <a href="mailto:info@fpspc.cz?subject=Objednávka: PC RTX 5060 (7 490 Kč)" class="btn-buy">Mám zájem o tuto mašinu</a>
-            </div>
-        </div>
-
-        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
-
-        <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
-        <div class="fps-grid">
-            
-            <!-- Fortnite -->
-            <div class="fps-box">
-                <div class="game-name">Fortnite</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-fortnite" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-fortnite" class="active-val">Low</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-det-fortnite" oninput="vypocitejFPS('fortnite')">
-                </div>
-                <div class="fps-result-box">
-                    <span class="fps-counter" id="txt-fps-fortnite">180+ FPS</span>
-                    <span class="fps-label">Průměrný výkon</span>
-                </div>
-                <div class="rt-row">
-                    <span class="rt-label">Ray-Tracing (FHD):</span>
-                    <span class="rt-value">75 FPS (DLSS)</span>
-                </div>
-            </div>
-
-            <!-- Counter-Strike 2 -->
-            <div class="fps-box no-rt">
-                <div class="game-name">Counter-Strike 2</div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Rozlišení:</span><span id="lbl-res-cs2" class="active-val">FHD (1080p)</span></div>
-                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-cs2" oninput="vypocitejFPS('cs2')">
-                </div>
-                <div class="slider-container">
-                    <div class="slider-label-row"><span>Detaily:</span><span id="lbl-det-cs2" class="active-val">Low</span></div>
+                    <input type="range" min="0" max="2" value="0" class="range-slider" id="sld-res-fortnite" oninput="aktualizovatKalkulator('fortnite')">

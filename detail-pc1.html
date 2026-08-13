@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
-        /* ČISTÁ HTML5 / CSS3 ARCHITEKTURA BEZ JAVASCRIPTU */
+        /* ČISTÉ HTML A CSS BEZ JAVASCRIPTU - STABILNÍ A RYCHLÉ */
         html, body {
             height: auto !important;
             overflow-y: scroll !important;
@@ -149,7 +149,7 @@
             flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             box-sizing: border-box;
-            min-height: 280px;
+            min-height: 290px;
         }
         .fps-box:hover { border-color: #0066ff; }
 
@@ -161,12 +161,12 @@
             margin-bottom: 15px;
         }
 
-        /* Schované radio inputy na pozadí */
+        /* Schované výběrové čudlíky na pozadí */
         input[type="radio"] {
             display: none !important;
         }
 
-        /* Řádky s popiskem a mačkacími tlačítky */
+        /* Řádky pro přepínání rozlišení a detailů */
         .control-row {
             display: flex;
             align-items: center;
@@ -196,7 +196,7 @@
             user-select: none;
         }
 
-        /* Výsledkový panel pro velké číslo FPS */
+        /* Krabička s velkým výsledným FPS číslem */
         .fps-display-container {
             text-align: center;
             margin: 15px 0;
@@ -209,11 +209,11 @@
             justify-content: center;
         }
         .fps-counter-value {
-            display: none; /* Skryto v základu */
+            display: none; /* Schované v základu */
             font-size: 32px;
             font-weight: 900;
             color: #0066ff;
-            animation: fadeIn 0.2s ease;
+            animation: fadeIn 0.15s ease;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.98); }
@@ -262,7 +262,7 @@
             background-color: #ffffff; color: #0066ff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 800;
         }
 
-        /* Vykreslení přesné kombinace FPS podle zakliknutí obou řádků najednou */
+        /* Zobrazení správné kombinace čísla na základě zakliknutí obou řádků najednou */
         #fhd-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-1, #fhd-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-2, #fhd-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-3,
         #k2-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-4, #k2-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-5, #k2-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-6,
         #k4-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-7, #k4-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-8, #k4-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-9,

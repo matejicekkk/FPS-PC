@@ -27,12 +27,11 @@
         .btn-back { text-decoration: none; color: #0066ff; font-weight: 700; font-size: 16px; }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Hlavní horní box */
         .product-container {
             max-width: 1100px;
             margin: 40px auto 20px auto;
@@ -85,9 +84,6 @@
             font-size: 16px;
             color: #475569;
         }
-        .specs-grid strong {
-            color: #0f172a;
-        }
 
         .price-tag {
             font-size: 32px;
@@ -107,64 +103,124 @@
             font-weight: 700;
             font-size: 18px;
             border-radius: 8px;
-            transition: background-color 0.2s;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn-buy:hover {
-            background-color: #36a000;
-            box-shadow: 0 8px 20px rgba(68, 187, 0, 0.25);
         }
 
-        /* SPODNÍ SEKCE: Herní testy (5 čtverců vedle sebe) */
+        /* NOVÁ SPODNÍ INTERAKTIVNÍ SEKCE */
         .fps-section-title {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             color: #0f172a;
-            margin: 40px 0 20px auto;
-            max-width: 1100px;
+            margin: 50px auto 20px auto;
+            max-width: 1200px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Přesně 5 sloupců */
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto 50px auto;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 1250px;
+            margin: 0 auto 60px auto;
         }
 
         .fps-box {
             background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px 10px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
-            aspect-ratio: 1 / 1; /* Perfektní čtverce */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             box-sizing: border-box;
+            transition: border-color 0.2s;
         }
+        .fps-box:hover { border-color: #0066ff; }
 
         .game-name {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 800;
             color: #0f172a;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        /* Výběrové lišty přepínačů */
+        .selector-row {
+            display: flex;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            padding: 2px;
             margin-bottom: 8px;
         }
 
+        .selector-btn {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            color: #64748b;
+            transition: all 0.15s;
+        }
+        .selector-btn.active {
+            background-color: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Počítadlo FPS */
+        .fps-display-container {
+            text-align: center;
+            margin: 10px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         .fps-counter {
-            font-size: 20px;
+            font-size: 26px;
             font-weight: 900;
             color: #0066ff;
-            background-color: #f0f6ff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            white-space: nowrap;
+            display: block;
+        }
+        .fps-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        /* Kolonka Ray-Tracing */
+        .rt-container {
+            border-top: 1px dashed #e2e8f0;
+            margin-top: 10px;
+            padding-top: 10px;
+            text-align: center;
+        }
+        .rt-badge {
+            font-size: 10px;
+            font-weight: 800;
+            background-color: #fef2f2;
+            color: #ef4444;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .fps-box:nth-child(n) .rt-badge { background-color: #f0fdf4; color: #16a34a; } /* Zelené RT pro podporované hry */
+        .fps-box.no-rt .rt-badge { background-color: #f1f5f9; color: #94a3b8; } /* Šedé pro nepodporované */
+        
+        .rt-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            display: block;
         }
     </style>
 </head>
@@ -198,42 +254,41 @@
             </div>
         </div>
 
-        <!-- Nadpis pro herní testy -->
-        <div class="fps-section-title">Očekávaný výkon ve hrách</div>
+        <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
 
-        <!-- Nová sekce: 5 čtverců s FPS -->
+        <!-- 5 interaktivních herních karet -->
         <div class="fps-grid">
-            <!-- Čtverec 1: Fortnite -->
-            <div class="fps-box">
-                <span class="game-name">Fortnite</span>
-                <span class="fps-counter">160+ FPS</span>
+            
+            <!-- HRA 1: Fortnite -->
+            <div class="fps-box" id="game-fortnite">
+                <div class="game-name">Fortnite</div>
+                <div class="selector-row">
+                    <button class="selector-btn active" onclick="changeStat('fortnite', 'res', 'fhd', this)">FHD</button>
+                    <button class="selector-btn" onclick="changeStat('fortnite', 'res', '2k', this)">2K</button>
+                    <button class="selector-btn" onclick="changeStat('fortnite', 'res', '4k', this)">4K</button>
+                </div>
+                <div class="selector-row">
+                    <button class="selector-btn active" onclick="changeStat('fortnite', 'det', 'low', this)">Low</button>
+                    <button class="selector-btn" onclick="changeStat('fortnite', 'det', 'mid', this)">Mid</button>
+                    <button class="selector-btn" onclick="changeStat('fortnite', 'det', 'high', this)">High</button>
+                </div>
+                <div class="fps-display-container">
+                    <span class="fps-counter" id="fps-fortnite">180+</span>
+                    <span class="fps-label">Průměrná FPS</span>
+                </div>
+                <div class="rt-container">
+                    <span class="rt-badge">Ray-Tracing (FHD)</span>
+                    <span class="rt-value">75 FPS (DLSS)</span>
+                </div>
             </div>
 
-            <!-- Čtverec 2: CS2 -->
-            <div class="fps-box">
-                <span class="game-name">Counter-Strike 2</span>
-                <span class="fps-counter">220+ FPS</span>
-            </div>
-
-            <!-- Čtverec 3: Minecraft -->
-            <div class="fps-box">
-                <span class="game-name">Minecraft</span>
-                <span class="fps-counter">350+ FPS</span>
-            </div>
-
-            <!-- Čtverec 4: GTA V -->
-            <div class="fps-box">
-                <span class="game-name">GTA V</span>
-                <span class="fps-counter">110+ FPS</span>
-            </div>
-
-            <!-- Čtverec 5: Roblox -->
-            <div class="fps-box">
-                <span class="game-name">Roblox</span>
-                <span class="fps-counter">60+ FPS (Cap)</span>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+            <!-- HRA 2: CS2 -->
+            <div class="fps-box no-rt" id="game-cs2">
+                <div class="game-name">CS2</div>
+                <div class="selector-row">
+                    <button class="selector-btn active" onclick="changeStat('cs2', 'res', 'fhd', this)">FHD</button>
+                    <button class="selector-btn" onclick="changeStat('cs2', 'res', '2k', this)">2K</button>
+                    <button class="selector-btn" onclick="changeStat('cs2', 'res', '4k', this)">4K</button>
+                </div>
+                <div class="selector-row">
+                    <button class="selector-btn active" onclick="changeStat('cs2', 'det', 'low', this)">Low</button>

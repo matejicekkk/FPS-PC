@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Výkonné herní mašiny</title>
     <style>
-        /* Kompaktní design bez nutnosti scrollování */
+        /* Zamknutí na jednu obrazovku bez scrollování */
         html, body {
             height: 100%;
             margin: 0;
@@ -13,7 +13,7 @@
             background-color: #ffffff;
             color: #1e293b;
             font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden; /* Zakáže scrollování kolečkem */
+            overflow: hidden; 
         }
         body {
             display: flex;
@@ -29,7 +29,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
-        /* Tvoje přesné logo: FPS velké v šedém rámečku, PC velké modré */
+        /* Logo: FPS velké v šedém rámečku, PC velké modré */
         .logo-container {
             display: flex;
             align-items: center;
@@ -63,7 +63,7 @@
         }
         nav a:hover { color: #0066ff; }
 
-        /* Hlavní obsah roztažený přesně na zbytek obrazovky */
+        /* Středový obsah */
         .main-content {
             flex-grow: 1;
             display: flex;
@@ -75,7 +75,7 @@
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
             margin: 0 0 5px 0;
             text-align: center;
@@ -84,53 +84,58 @@
         
         .subtitle {
             color: #64748b;
-            font-size: 16px;
-            margin: 0 0 25px 0;
+            font-size: 17px;
+            margin: 0 0 35px 0;
             text-align: center;
         }
 
-        /* 4 Kategorie pod sebou - úzké a přehledné */
-        .category-list {
+        /* Mřížka pro 4 střední čtverce vedle sebe */
+        .grid-container {
             width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            max-width: 1100px; /* Širší kontejner, aby se vešly 4 vedle sebe */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Přesně 4 sloupce */
+            gap: 20px;
         }
 
-        .category-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .category-box {
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px 25px;
+            border-radius: 12px;
+            padding: 35px 15px;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+            aspect-ratio: 1 / 1; /* Perfektní čtverec */
         }
 
-        .category-row:hover {
+        .category-box:hover {
             border-color: #0066ff;
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 102, 255, 0.15);
         }
 
         .category-name {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #0f172a;
+            margin-bottom: 15px;
         }
 
         .category-price {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: #0066ff;
             background-color: #f0f6ff;
-            padding: 6px 12px;
+            padding: 8px 12px;
             border-radius: 6px;
+            white-space: nowrap; /* Zabrání rozdělení ceny na dva řádky */
         }
     </style>
 </head>
@@ -151,28 +156,29 @@
         <h1>Poctivé <span>Herní Mašiny</span></h1>
         <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
-        <div class="category-list">
-            <!-- Kategorie 1 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 5-10k" class="category-row">
-                <span class="category-name">Herní PC | Základní výkon</span>
+        <!-- 4 Kategorie vedle sebe v jedné řadě -->
+        <div class="grid-container">
+            <!-- Čtverec 1 -->
+            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 5-10k" class="category-box">
+                <span class="category-name">Základní výkon</span>
                 <span class="category-price">5 000 - 10 000 Kč</span>
             </a>
 
-            <!-- Kategorie 2 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 10-15k" class="category-row">
-                <span class="category-name">Herní PC | Dostupný gaming</span>
+            <!-- Čtverec 2 -->
+            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 10-15k" class="category-box">
+                <span class="category-name">Dostupný gaming</span>
                 <span class="category-price">10 000 - 15 000 Kč</span>
             </a>
 
-            <!-- Kategorie 3 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 15-25k" class="category-row">
-                <span class="category-name">Herní PC | Pokročilý výkon</span>
+            <!-- Čtverec 3 -->
+            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 15-25k" class="category-box">
+                <span class="category-name">Pokročilý výkon</span>
                 <span class="category-price">15 000 - 25 000 Kč</span>
             </a>
 
-            <!-- Kategorie 4 -->
-            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 25-35k" class="category-row">
-                <span class="category-name">Herní PC | High-end mašiny</span>
+            <!-- Čtverec 4 -->
+            <a href="mailto:info@fpspc.cz?subject=Poptávka PC: 25-35k" class="category-box">
+                <span class="category-name">High-end mašiny</span>
                 <span class="category-price">25 000 - 35 000 Kč</span>
             </a>
         </div>

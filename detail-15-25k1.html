@@ -262,7 +262,7 @@
             <input type="range" id="det-fortnite" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-fortnite">120 FPS</div>
+            <div class="fps-value" id="fps-fortnite">240 FPS</div>
           </div>
         </div>
 
@@ -278,7 +278,7 @@
             <input type="range" id="det-cs2" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cs2">140 FPS</div>
+            <div class="fps-value" id="fps-cs2">350 FPS</div>
           </div>
         </div>
 
@@ -294,7 +294,7 @@
             <input type="range" id="det-valorant" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-valorant">180 FPS</div>
+            <div class="fps-value" id="fps-valorant">400 FPS</div>
           </div>
         </div>
 
@@ -316,7 +316,7 @@
             <input type="range" id="det-cyberpunk" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cyberpunk">35 FPS</div>
+            <div class="fps-value" id="fps-cyberpunk">100 FPS</div>
           </div>
         </div>
 
@@ -332,7 +332,7 @@
             <input type="range" id="det-gtav" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-gtav">90 FPS</div>
+            <div class="fps-value" id="fps-gtav">160 FPS</div>
           </div>
         </div>
 
@@ -343,17 +343,17 @@
 
   <script>
     const baseFPS = {
-      fortnite: 120,
-      cs2: 140,
-      valorant: 180,
-      cyberpunk: 35,
-      gtav: 90
+      fortnite: 240,
+      cs2: 350,
+      valorant: 400,
+      cyberpunk: 100,
+      gtav: 160
     };
 
-    const resMultipliers = [1.0, 0.68, 0.40];
+    const resMultipliers = [1.0, 0.72, 0.45];
     const resNames = ["FHD (1080p)", "2K (1440p)", "4K (2160p)"];
 
-    const detMultipliers = [1.0, 0.82, 0.65, 0.48];
+    const detMultipliers = [1.0, 0.80, 0.62, 0.48];
     const detNames = ["Low", "Medium", "High", "Ultra"];
 
     function recalculate(game) {

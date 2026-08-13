@@ -11,6 +11,7 @@
             background-color: #f8fafc;
             color: #1e293b;
             font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow-y: auto; /* OPRAVA: Povolí posuvník nahoru a dolů */
         }
 
         header {
@@ -106,7 +107,6 @@
             text-transform: uppercase;
         }
 
-        /* NOVÁ SPODNÍ INTERAKTIVNÍ SEKCE */
         .fps-section-title {
             font-size: 24px;
             font-weight: 800;
@@ -117,11 +117,12 @@
             text-align: center;
         }
 
+        /* OPRAVA MŘÍŽKY: Flexibilní rozvržení, které se přizpůsobí monitoru a nic neschová */
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 15px;
-            max-width: 1250px;
+            max-width: 1100px;
             margin: 0 auto 60px auto;
         }
 
@@ -135,6 +136,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             box-sizing: border-box;
             transition: border-color 0.2s;
+            min-height: 250px;
         }
         .fps-box:hover { border-color: #0066ff; }
 
@@ -146,7 +148,6 @@
             margin-bottom: 12px;
         }
 
-        /* Výběrové lišty přepínačů */
         .selector-row {
             display: flex;
             background-color: #f1f5f9;
@@ -173,7 +174,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* Počítadlo FPS */
         .fps-display-container {
             text-align: center;
             margin: 10px 0;
@@ -195,7 +195,6 @@
             text-transform: uppercase;
         }
 
-        /* Kolonka Ray-Tracing */
         .rt-container {
             border-top: 1px dashed #e2e8f0;
             margin-top: 10px;
@@ -205,16 +204,15 @@
         .rt-badge {
             font-size: 10px;
             font-weight: 800;
-            background-color: #fef2f2;
-            color: #ef4444;
+            background-color: #f1f5f9;
+            color: #16a34a;
             padding: 2px 6px;
             border-radius: 4px;
             display: inline-block;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
-        .fps-box:nth-child(n) .rt-badge { background-color: #f0fdf4; color: #16a34a; } /* Zelené RT pro podporované hry */
-        .fps-box.no-rt .rt-badge { background-color: #f1f5f9; color: #94a3b8; } /* Šedé pro nepodporované */
+        .fps-box.no-rt .rt-badge { color: #94a3b8; }
         
         .rt-value {
             font-size: 13px;
@@ -235,7 +233,6 @@
     </header>
 
     <div class="container">
-        <!-- Hlavní parametry PC -->
         <div class="product-container">
             <div class="product-left">
                 <img src="test.webp" alt="FPS-PC Sestava">
@@ -256,10 +253,8 @@
 
         <div class="fps-section-title">⚡ Interaktivní testy výkonu sestavy</div>
 
-        <!-- 5 interaktivních herních karet -->
         <div class="fps-grid">
             
-            <!-- HRA 1: Fortnite -->
             <div class="fps-box" id="game-fortnite">
                 <div class="game-name">Fortnite</div>
                 <div class="selector-row">
@@ -282,7 +277,6 @@
                 </div>
             </div>
 
-            <!-- HRA 2: CS2 -->
             <div class="fps-box no-rt" id="game-cs2">
                 <div class="game-name">CS2</div>
                 <div class="selector-row">
@@ -292,3 +286,6 @@
                 </div>
                 <div class="selector-row">
                     <button class="selector-btn active" onclick="changeStat('cs2', 'det', 'low', this)">Low</button>
+                    <button class="selector-btn" onclick="changeStat('cs2', 'det', 'mid', this)">Mid</button>
+                    <button class="selector-btn" onclick="changeStat('cs2', 'det', 'high', this)">High</button>
+                </div>

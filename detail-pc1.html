@@ -161,12 +161,12 @@
             margin-bottom: 15px;
         }
 
-        /* Skryté nativní radio inputy */
+        /* Schované radio inputy na pozadí */
         input[type="radio"] {
             display: none !important;
         }
 
-        /* Styl pro řádky s přepínači */
+        /* Řádky s popiskem a mačkacími tlačítky */
         .control-row {
             display: flex;
             align-items: center;
@@ -196,7 +196,7 @@
             user-select: none;
         }
 
-        /* Box pro výsledné velké číslo FPS */
+        /* Výsledkový panel pro velké číslo FPS */
         .fps-display-container {
             text-align: center;
             margin: 15px 0;
@@ -209,7 +209,7 @@
             justify-content: center;
         }
         .fps-counter-value {
-            display: none; /* Schováno ve výchozím stavu */
+            display: none; /* Skryto v základu */
             font-size: 32px;
             font-weight: 900;
             color: #0066ff;
@@ -226,6 +226,7 @@
             text-transform: uppercase;
         }
 
+        /* Spodní panel pro Ray-Tracing */
         .rt-row {
             background-color: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -242,8 +243,8 @@
         .fps-box.no-rt .rt-label { color: #94a3b8; }
         .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 12px; }
 
-        /* --- FILTRACE VRSTEV POMOCÍ CSS --- */
-        /* Aktivní vzhled mačkacích tlačítek */
+        /* --- FILTRACE VRSTEV POMOCÍ ČISTÉHO CSS --- */
+        /* Aktivní barva vybraného tlačítka */
         #fhd-fort:checked ~ .control-row label[for="fhd-fort"], #k2-fort:checked ~ .control-row label[for="k2-fort"], #k4-fort:checked ~ .control-row label[for="k4-fort"],
         #low-fort:checked ~ .control-row label[for="low-fort"], #mid-fort:checked ~ .control-row label[for="mid-fort"], #high-fort:checked ~ .control-row label[for="high-fort"],
         
@@ -261,7 +262,7 @@
             background-color: #ffffff; color: #0066ff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 800;
         }
 
-        /* Zobrazení správné kombinace čísla na základě zakliknutí obou řádků */
+        /* Vykreslení přesné kombinace FPS podle zakliknutí obou řádků najednou */
         #fhd-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-1, #fhd-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-2, #fhd-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-3,
         #k2-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-4, #k2-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-5, #k2-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-6,
         #k4-fort:checked ~ #low-fort:checked ~ .fps-display-container #fort-7, #k4-fort:checked ~ #mid-fort:checked ~ .fps-display-container #fort-8, #k4-fort:checked ~ #high-fort:checked ~ .fps-display-container #fort-9,

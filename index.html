@@ -114,6 +114,7 @@
             margin-bottom: 15px;
         }
 
+        /* Tlačítka uprostřed - upraveno pro bezchybné klikání */
         .category-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
@@ -146,6 +147,7 @@
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 8px;
+            pointer-events: none; /* Zajistí, že klikneš na box, ne na text */
         }
 
         .category-price {
@@ -156,11 +158,12 @@
             padding: 5px 8px;
             border-radius: 6px;
             white-space: nowrap;
+            pointer-events: none;
         }
 
         /* Výběr grafické karty (NVIDIA / AMD) */
         .gpu-selector-container {
-            display: none; /* Schované, dokud se neklikne na rozpočet */
+            display: none; 
             margin-bottom: 15px;
             gap: 15px;
             animation: fadeIn 0.2s ease;
@@ -194,7 +197,7 @@
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
         }
 
-        /* Panel pro zobrazení detailu PC */
+        /* Panel pro zobrazení specifikací PC */
         .pc-detail-container {
             width: 100%;
             background-color: #ffffff;
@@ -287,36 +290,36 @@
             <h1>Poctivé <span>Herní Mašiny</span></h1>
             <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
-            <!-- 4 Kategorie rozpočtu -->
+            <!-- Klikací boxy uprostřed -->
             <div class="grid-container">
-                <div class="category-box" id="btn-kat1">
+                <div class="category-box" onclick="kliknutiNaRozpocet('kat1', this)">
                     <span class="category-name">Základní výkon</span>
                     <span class="category-price">5 000 - 10 000 Kč</span>
                 </div>
 
-                <div class="category-box" id="btn-kat2">
+                <div class="category-box" onclick="kliknutiNaRozpocet('kat2', this)">
                     <span class="category-name">Dostupný gaming</span>
                     <span class="category-price">10 000 - 15 000 Kč</span>
                 </div>
 
-                <div class="category-box" id="btn-kat3">
+                <div class="category-box" onclick="kliknutiNaRozpocet('kat3', this)">
                     <span class="category-name">Pokročilý výkon</span>
                     <span class="category-price">15 000 - 25 000 Kč</span>
                 </div>
 
-                <div class="category-box" id="btn-kat4">
+                <div class="category-box" onclick="kliknutiNaRozpocet('kat4', this)">
                     <span class="category-name">High-end mašiny</span>
                     <span class="category-price">25 000 - 35 000 Kč</span>
                 </div>
             </div>
 
-            <!-- Přidané přepínání GPU (NVIDIA / AMD) -->
+            <!-- Přepínání grafických karet -->
             <div id="gpu-selector" class="gpu-selector-container">
-                <button class="gpu-btn nvidia" id="btn-nvidia">NVIDIA</button>
-                <button class="gpu-btn amd" id="btn-amd">AMD / Radeon</button>
+                <button class="gpu-btn nvidia" onclick="kliknutiNaGPU('nvidia')">NVIDIA</button>
+                <button class="gpu-btn amd" onclick="kliknutiNaGPU('amd')">AMD / Radeon</button>
             </div>
 
-            <!-- Panel pro zobrazení specifikací PC -->
+            <!-- Panel specifikací vybrané mašiny -->
             <div id="pc-detail" class="pc-detail-container">
                 <div class="pc-detail-content">
                     <div class="pc-info-text">
@@ -325,14 +328,3 @@
                     </div>
                     <div class="pc-action">
                         <span class="pc-final-price" id="pc-price">0 Kč</span>
-                        <a href="#" id="pc-link" class="btn-order">Mám zájem</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        // Kompletní databáze rozdělená podle rozpočtu i podle značky grafiky
-        const pcData = {

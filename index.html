@@ -106,7 +106,7 @@
             text-align: center;
         }
 
-        /* Mřížka rozcestníku kategorií */
+        /* Opravená čistá mřížka 4 sloupců vedle sebe */
         .grid-container {
             width: 100%;
             display: grid;
@@ -119,9 +119,7 @@
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            padding: 20px 10px;
-            text-decoration: none;
-            color: inherit;
+            padding: 25px 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -131,6 +129,7 @@
             transition: all 0.2s ease-in-out;
             aspect-ratio: 1.1 / 1;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         .category-box:hover, .category-box.active {
@@ -160,7 +159,7 @@
             white-space: nowrap;
         }
 
-        /* Sekce pro zobrazení detailu vybraného PC */
+        /* Schovaný panel pro detail vybraného PC */
         .pc-detail-container {
             width: 100%;
             background-color: #ffffff;
@@ -168,7 +167,7 @@
             border-radius: 12px;
             padding: 20px;
             box-sizing: border-box;
-            display: none; /* Schované, dokud se neklikne */
+            display: none; 
             animation: fadeIn 0.3s ease;
         }
 
@@ -253,7 +252,7 @@
             <h1>Poctivé <span>Herní Mašiny</span></h1>
             <p class="subtitle">Vyber si herní PC podle svého rozpočtu</p>
 
-            <!-- 4 Kategorie (teď jako klikací divy s funkcí) -->
+            <!-- Opravené boxy bez starých áčkových značek -->
             <div class="grid-container">
                 <div class="category-box" onclick="showPC('kat1', this)">
                     <span class="category-name">Základní výkon</span>
@@ -268,7 +267,7 @@
                 <div class="category-box" onclick="showPC('kat3', this)">
                     <span class="category-name">Pokročilý výkon</span>
                     <span class="category-price">15 000 - 25 000 Kč</span>
-                </a>
+                </div>
 
                 <div class="category-box" onclick="showPC('kat4', this)">
                     <span class="category-name">High-end mašiny</span>
@@ -276,14 +275,12 @@
                 </div>
             </div>
 
-            <!-- Tady se dynamicky otevírají detaily počítačů -->
+            <!-- Panel pro zobrazení detailu vybraného PC -->
             <div id="pc-detail" class="pc-detail-container">
                 <div class="pc-detail-content">
                     <div class="pc-info-text">
                         <h3 id="pc-title">Název PC</h3>
-                        <ul class="pc-specs" id="pc-specs">
-                            <!-- Specifikace se doplní přes JavaScript -->
-                        </ul>
+                        <ul class="pc-specs" id="pc-specs"></ul>
                     </div>
                     <div class="pc-action">
                         <span class="pc-final-price" id="pc-price">0 Kč</span>
@@ -295,9 +292,7 @@
         </div>
     </div>
 
-    <!-- JavaScript pro inteligentní přepínání bez scrollování -->
     <script>
-        // Databáze tvých herních sestav
         const pcData = {
             kat1: {
                 title: "FPS-PC Fortnite Starter",
@@ -320,12 +315,18 @@
                     "• GPU: NVIDIA GTX 1660 Super 6GB",
                     "• RAM: 16GB DDR4 Gaming",
                     "• SSD: 500GB NVMe M.2",
-                    "• Výkon: CS2, GTA V, Apex Legends na plynulé detaily"
+                    "• Výkon: CS2, GTA V, Apex Legends"
                 ]
             },
             kat3: {
                 title: "FPS-PC UltraStreamer",
                 price: "22 990 Kč",
+                mailSubject: "Zájem o UltraStreamer (15-25k)",
+                specs: [
+                    "• CPU: AMD Ryzen 5 5600X",
+                    "• GPU: NVIDIA RTX 4060 8GB GDDR6",
+                    "• RAM: 32GB DDR4 High-Speed",
+                    "• SSD: 1TB NVMe Gen4 SSD",
 
 
 

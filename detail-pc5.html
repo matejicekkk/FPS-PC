@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPS-PC | Herní PC GTX 1080ti | i7-4790</title>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-fps {
+      font-size: 24px;
+      font-weight: 900;
+      color: #1e293b;
+      border: 3px solid #1e293b;
+      padding: 2px 8px;
+      text-transform: uppercase;
+    }
+
+    .logo-pc {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0066ff;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+
+    .btn-back {
+      text-decoration: none;
+      color: #0066ff;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 350px;
+    }
+
+    .product-info h1 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+    }
+
+    .specs-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 15px;
+    }
+
+    .price-tag {
+      font-size: 28px;
+      font-weight: 900;
+      color: #22c55e;
+      margin-bottom: 20px;
+    }
+
+    .btn-buy {
+      display: block;
+      width: 100%;
+      background-color: #22c55e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-buy:hover {
+      background-color: #16a34a;
+    }
+
+    .tests-section {
+      margin-top: 40px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      border: 2px solid #e2e8f0;
+    }
+
+    .tests-section h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .test-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .test-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .test-row {
+      margin-bottom: 10px;
+    }
+
+    .test-row label {
+      display: block;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .test-row input[type="range"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="pc-5-10k.html" class="logo-container">
+      <span class="logo-fps">FPS</span>
+      <span class="logo-pc">PC</span>
+    </a>
+    <a href="pc-5-10k.html" class="btn-back">← Zpět na kategorii</a>
+  </header>
+
+  <div class="container">
+    <div class="product-card">
+      <div class="product-image">
+        <img src="images.jpg" alt="Herní PC RX 580">
+      </div>
+      <div class="product-info">
+        <h1>Herní PC RX 580 | i5-4570</h1>
+        <ul class="specs-list">
+          <li>🎮 <strong>Grafická karta:</strong> AMD Radeon RX 580 8GB</li>
+          <li>⚡ <strong>Procesor:</strong> Intel Core i5-4570</li>
+          <li>🧠 <strong>Operační paměť:</strong> 16GB DDR3 Gaming</li>
+          <li>💾 <strong>Pevný disk:</strong> 512GB SSD</li>
+          <li>💻 <strong>Operační systém:</strong> Windows 11 Pro</li>
+        </ul>
+        <div class="price-tag">6 990 Kč</div>
+        <a href="#" class="btn-buy">MÁM ZÁJEM O TUTO MAŠINU</a>
+      </div>
+    </div>
+
+    <div class="tests-section">
+      <h2>⚡ Interaktivní testy výkonu sestavy</h2>
+      <div class="test-grid">
+        <div class="test-card">
+          <h3>Fortnite</h3>
+          <div class="test-row">
+            <label>Rozlišení: FHD (1080p)</label>
+            <input type="range" disabled value="75">
+          </div>
+          <div class="test-row">
+            <label>Detaily: Střední</label>
+            <input type="range" disabled value="50">
+          </div>
+        </div>
+        <div class="test-card">
+          <h3>Counter-Strike 2</h3>
+          <div class="test-row">
+            <label>Rozlišení: FHD (1080p)</label>
+            <input type="range" disabled value="75">
+          </div>
+          <div class="test-row">
+            <label>Detaily: Nízké</label>
+            <input type="range" disabled value="30">
+          </div>
+        </div>
+        <div class="test-card">
+          <h3>Valorant</h3>
+          <div class="test-row">
+            <label>Rozlišení: FHD (1080p)</label>
+            <input type="range" disabled value="75">
+          </div>
+          <div class="test-row">
+            <label>Detaily: Střední</label>
+            <input type="range" disabled value="60">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

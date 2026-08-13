@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPS-PC | Detail sestavy</title>
     <style>
-        html, body {
-            height: auto !important;
-            overflow-y: scroll !important; /* Vynutí posuvník */
+        /* ČISTÉ HTML/CSS - ŽÁDNÝ JAVASCRIPT */
+        body {
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
@@ -130,107 +129,81 @@
             letter-spacing: 0.5px;
         }
 
+        /* Mřížka pro hry */
         .fps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
             max-width: 1100px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 40px auto;
         }
 
         .fps-box {
             background-color: #ffffff;
             border: 2px solid #e2e8f0;
             border-radius: 14px;
-            padding: 20px 15px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             box-sizing: border-box;
-            transition: border-color 0.2s;
-            min-height: 250px;
         }
-        .fps-box:hover { border-color: #0066ff; }
 
         .game-name {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
             margin-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
         }
 
-        .selector-row {
-            display: flex;
-            background-color: #f1f5f9;
-            border-radius: 6px;
-            padding: 2px;
-            margin-bottom: 8px;
+        /* Přehledná tabulka s FPS hodnotami */
+        .fps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
         }
 
-        .selector-btn {
-            flex: 1;
-            border: none;
-            background: none;
+        .fps-table th {
+            text-align: left;
             font-size: 12px;
-            font-weight: 700;
-            padding: 6px 2px;
-            cursor: pointer;
-            border-radius: 4px;
-            color: #64748b;
-            transition: all 0.15s;
-        }
-        .selector-btn.active {
-            background-color: #ffffff;
-            color: #0f172a;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .fps-display-container {
-            text-align: center;
-            margin: 15px 0;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .fps-counter {
-            font-size: 32px;
-            font-weight: 900;
-            color: #0066ff;
-            display: block;
-        }
-        .fps-label {
-            font-size: 11px;
-            font-weight: 600;
             color: #94a3b8;
             text-transform: uppercase;
+            padding-bottom: 8px;
         }
 
-        .rt-container {
-            border-top: 1px dashed #e2e8f0;
-            margin-top: 12px;
-            padding-top: 12px;
-            text-align: center;
+        .fps-table td {
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #f8fafc;
         }
-        .rt-badge {
-            font-size: 10px;
-            font-weight: 800;
+
+        .td-res { font-weight: 700; color: #334155; }
+        .td-det { color: #64748b; font-style: italic; }
+        .td-fps { font-weight: 900; color: #0066ff; text-align: right; font-size: 16px; }
+
+        /* Speciální kolonka pro Ray-Tracing */
+        .rt-row {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        .rt-label { font-size: 13px; font-weight: 700; color: #16a34a; }
+        .rt-value { font-size: 15px; font-weight: 800; color: #15803d; }
+
+        .fps-box.no-rt .rt-row {
             background-color: #f1f5f9;
-            color: #16a34a;
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 4px;
+            border-color: #e2e8f0;
         }
-        .fps-box.no-rt .rt-badge { color: #94a3b8; background-color: #f1f5f9; }
-        
-        .rt-value {
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
-            display: block;
-        }
+        .fps-box.no-rt .rt-label { color: #94a3b8; }
+        .fps-box.no-rt .rt-value { color: #64748b; font-weight: 600; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -266,28 +239,28 @@
         <div class="fps-section-title">⚡ Výkon sestavy v herních testech</div>
 
         <!-- SKUPINA 1: Kompetitivní hry -->
-        <div class="game-group-title">🏆 Kompetitivní & E-sport hry (Vysoké FPS)</div>
+        <div class="game-group-title">🏆 Kompetitivní & E-sport hry</div>
         <div class="fps-grid">
             
             <!-- Fortnite -->
             <div class="fps-box">
                 <div class="game-name">Fortnite</div>
-                <div class="selector-row">
-                    <button class="selector-btn active" onclick="zmenFPS('fortnite', 'res', 'fhd', this)">FHD</button>
-                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'res', '2k', this)">2K</button>
-                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'res', '4k', this)">4K</button>
-                </div>
-                <div class="selector-row">
-                    <button class="selector-btn active" onclick="zmenFPS('fortnite', 'det', 'low', this)">Low</button>
-                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'det', 'mid', this)">Mid</button>
-                    <button class="selector-btn" onclick="zmenFPS('fortnite', 'det', 'high', this)">High</button>
-                </div>
-                <div class="fps-display-container">
-                    <span class="fps-counter" id="fps-fortnite">180+</span>
-                    <span class="fps-label">Průměrná FPS</span>
-                </div>
-                <div class="rt-container">
-                    <span class="rt-badge">Ray-Tracing (FHD)</span>
+                <table class="fps-table">
+                    <thead>
+                        <tr>
+                            <th>Rozlišení</th>
+                            <th>Grafika</th>
+                            <th style="text-align: right;">Očekávané FPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="td-res">FHD (1080p)</td><td class="td-det">Low / Perf</td><td class="td-fps">180+ FPS</td></tr>
+                        <tr><td class="td-res">2K (1440p)</td><td class="td-det">Medium</td><td class="td-fps">95 FPS</td></tr>
+                        <tr><td class="td-res">4K (2160p)</td><td class="td-det">High</td><td class="td-fps">35 FPS</td></tr>
+                    </tbody>
+                </table>
+                <div class="rt-row">
+                    <span class="rt-label">Ray-Tracing (FHD):</span>
                     <span class="rt-value">75 FPS (DLSS)</span>
                 </div>
             </div>
@@ -295,7 +268,26 @@
             <!-- CS2 -->
             <div class="fps-box no-rt">
                 <div class="game-name">Counter-Strike 2</div>
-                <div class="selector-row">
-                    <button class="selector-btn active" onclick="zmenFPS('cs2', 'res', 'fhd', this)">FHD</button>
-                    <button class="selector-btn" onclick="zmenFPS('cs2', 'res', '2k', this)">2K</button>
-                    <button class="selector-btn" onclick="zmenFPS('cs2', 'res', '4k', this)">4K</button>
+                <table class="fps-table">
+                    <thead>
+                        <tr>
+                            <th>Rozlišení</th>
+                            <th>Grafika</th>
+                            <th style="text-align: right;">Očekávané FPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="td-res">FHD (1080p)</td><td class="td-det">Low / Pro</td><td class="td-fps">290+ FPS</td></tr>
+                        <tr><td class="td-res">2K (1440p)</td><td class="td-det">Medium</td><td class="td-fps">165 FPS</td></tr>
+                        <tr><td class="td-res">4K (2160p)</td><td class="td-det">High</td><td class="td-fps">60 FPS</td></tr>
+                    </tbody>
+                </table>
+                <div class="rt-row">
+                    <span class="rt-label">Ray-Tracing:</span>
+                    <span class="rt-value">Nepodporováno</span>
+                </div>
+            </div>
+
+            <!-- Minecraft -->
+            <div class="fps-box">
+                <div class="game-name">Minecraft</div>

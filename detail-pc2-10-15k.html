@@ -151,6 +151,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+      align-items: start;
     }
 
     .game-card {
@@ -261,8 +262,16 @@
             <label>Detaily: <span class="value-badge" id="det-label-fortnite">Low</span></label>
             <input type="range" id="det-fortnite" min="0" max="3" value="0">
           </div>
+          <div class="control-group">
+            <label>Ray Tracing: <span class="value-badge" id="rt-label-fortnite">Vypnuto</span></label>
+            <input type="range" id="rt-fortnite" min="0" max="1" value="0">
+          </div>
+          <div class="control-group">
+            <label>DLSS: <span class="value-badge" id="dlss-label-fortnite">Vypnuto</span></label>
+            <input type="range" id="dlss-fortnite" min="0" max="3" value="0">
+          </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-fortnite">120 FPS</div>
+            <div class="fps-value" id="fps-fortnite">380 FPS</div>
           </div>
         </div>
 
@@ -278,7 +287,7 @@
             <input type="range" id="det-cs2" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cs2">140 FPS</div>
+            <div class="fps-value" id="fps-cs2">420 FPS</div>
           </div>
         </div>
 
@@ -294,7 +303,7 @@
             <input type="range" id="det-valorant" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-valorant">180 FPS</div>
+            <div class="fps-value" id="fps-valorant">480 FPS</div>
           </div>
         </div>
 
@@ -315,8 +324,16 @@
             <label>Detaily: <span class="value-badge" id="det-label-cyberpunk">Low</span></label>
             <input type="range" id="det-cyberpunk" min="0" max="3" value="0">
           </div>
+          <div class="control-group">
+            <label>Ray Tracing: <span class="value-badge" id="rt-label-cyberpunk">Vypnuto</span></label>
+            <input type="range" id="rt-cyberpunk" min="0" max="1" value="0">
+          </div>
+          <div class="control-group">
+            <label>DLSS: <span class="value-badge" id="dlss-label-cyberpunk">Vypnuto</span></label>
+            <input type="range" id="dlss-cyberpunk" min="0" max="3" value="0">
+          </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cyberpunk">35 FPS</div>
+            <div class="fps-value" id="fps-cyberpunk">140 FPS</div>
           </div>
         </div>
 
@@ -332,7 +349,7 @@
             <input type="range" id="det-gtav" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-gtav">90 FPS</div>
+            <div class="fps-value" id="fps-gtav">190 FPS</div>
           </div>
         </div>
 
@@ -342,12 +359,14 @@
   </div>
 
   <script>
+    // Realistické výchozí hodnoty pro RTX 4060 8GB + Ryzen 7 5800X
+    // Platí pro FHD (1080p) na nejnižší (Low) detaily, RT Vypnuto, DLSS Vypnuto
     const baseFPS = {
-      fortnite: 120,
-      cs2: 140,
-      valorant: 180,
-      cyberpunk: 35,
-      gtav: 90
+      fortnite: 380,
+      cs2: 420,
+      valorant: 480,
+      cyberpunk: 140,
+      gtav: 190
     };
 
     const resMultipliers = [1.0, 0.68, 0.40];
@@ -356,9 +375,17 @@
     const detMultipliers = [1.0, 0.82, 0.65, 0.48];
     const detNames = ["Low", "Medium", "High", "Ultra"];
 
+    const rtMultipliers = [1.0, 0.55];
+    const rtNames = ["Vypnuto", "Zapnuto"];
+
+    const dlssMultipliers = [1.0, 1.25, 1.45, 1.70];
+    const dlssNames = ["Vypnuto", "Quality", "Balanced", "Performance"];
+
     function recalculate(game) {
       const resInput = document.getElementById('res-' + game);
       const detInput = document.getElementById('det-' + game);
+      const rtInput = document.getElementById('rt-' + game);
+      const dlssInput = document.getElementById('dlss-' + game);
       
       if (!resInput || !detInput) return;
 
@@ -368,18 +395,37 @@
       document.getElementById('res-label-' + game).innerText = resNames[resVal];
       document.getElementById('det-label-' + game).innerText = detNames[detVal];
 
-      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal]);
+      let rtMult = 1.0;
+      if (rtInput) {
+        const rtVal = parseInt(rtInput.value);
+        document.getElementById('rt-label-' + game).innerText = rtNames[rtVal];
+        rtMult = rtMultipliers[rtVal];
+      }
+
+      let dlssMult = 1.0;
+      if (dlssInput) {
+        const dlssVal = parseInt(dlssInput.value);
+        document.getElementById('dlss-label-' + game).innerText = dlssNames[dlssVal];
+        dlssMult = dlssMultipliers[dlssVal];
+      }
+
+      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal] * rtMult * dlssMult);
       
       document.getElementById('fps-' + game).innerText = calculated + " FPS";
     }
 
     const games = ['fortnite', 'cs2', 'valorant', 'cyberpunk', 'gtav'];
+    
     games.forEach(game => {
       const resInput = document.getElementById('res-' + game);
       const detInput = document.getElementById('det-' + game);
+      const rtInput = document.getElementById('rt-' + game);
+      const dlssInput = document.getElementById('dlss-' + game);
 
       if (resInput) resInput.addEventListener('input', () => recalculate(game));
       if (detInput) detInput.addEventListener('input', () => recalculate(game));
+      if (rtInput) rtInput.addEventListener('input', () => recalculate(game));
+      if (dlssInput) dlssInput.addEventListener('input', () => recalculate(game));
 
       recalculate(game);
     });

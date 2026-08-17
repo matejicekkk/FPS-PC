@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -152,7 +151,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
-      align-items: start; /* Zajistí, že karty s více posuvníky nebudou zbytečně natahovat ostatní */
     }
 
     .game-card {
@@ -229,18 +227,18 @@
 
     <div class="product-detail-card">
       <div class="product-image-container">
-        <img src="images.jpg" alt="Herní PC">
+        <img src="pc-1.jpg" alt="Herní PC">
       </div>
       <div class="product-info">
-        <h1>Herní PC RTX 4060 | Ryzen 5 5600</h1>
+        <h1>Herní PC GTX 1060 6GB | Ryzen 5 2600</h1>
         <ul class="specs-list">
-          <li>🎮 Grafická karta: <strong>NVIDIA GeForce RTX 4060</strong></li>
-          <li>🔥 Procesor: <strong>AMD Ryzen 5 5600</strong></li>
+          <li>🎮 Grafická karta: <strong>NVIDIA GeForce GTX 1060 6GB</strong></li>
+          <li>🔥 Procesor: <strong>AMD Ryzen 5 2600</strong></li>
           <li>⚡ Operační paměť: <strong>16GB DDR4 Gaming</strong></li>
-          <li>💾 Pevný disk: <strong>1TB SSD</strong></li>
-          <li>💿 Operační systém: <strong>Windows 11 Pro</strong></li>
+          <li>💾 Pevný disk: <strong>256GB SSD</strong></li>
+          <li>💿 Operační systém: <strong>Windows 10 Pro</strong></li>
         </ul>
-        <div class="price-tag">18 990 Kč</div>
+        <div class="price-tag">5 990 Kč</div>
         <button class="btn-buy">MÁM ZÁJEM O TUTO MAŠINU</button>
       </div>
     </div>
@@ -263,16 +261,8 @@
             <label>Detaily: <span class="value-badge" id="det-label-fortnite">Low</span></label>
             <input type="range" id="det-fortnite" min="0" max="3" value="0">
           </div>
-          <div class="control-group">
-            <label>Ray Tracing: <span class="value-badge" id="rt-label-fortnite">Vypnuto</span></label>
-            <input type="range" id="rt-fortnite" min="0" max="1" value="0">
-          </div>
-          <div class="control-group">
-            <label>DLSS: <span class="value-badge" id="dlss-label-fortnite">Vypnuto</span></label>
-            <input type="range" id="dlss-fortnite" min="0" max="3" value="0">
-          </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-fortnite">240 FPS</div>
+            <div class="fps-value" id="fps-fortnite">120 FPS</div>
           </div>
         </div>
 
@@ -287,9 +277,8 @@
             <label>Detaily: <span class="value-badge" id="det-label-cs2">Low</span></label>
             <input type="range" id="det-cs2" min="0" max="3" value="0">
           </div>
-          <!-- CS2 nepoužívá nativní RT/DLSS, takže tu chybí -->
           <div class="fps-box">
-            <div class="fps-value" id="fps-cs2">350 FPS</div>
+            <div class="fps-value" id="fps-cs2">140 FPS</div>
           </div>
         </div>
 
@@ -305,7 +294,7 @@
             <input type="range" id="det-valorant" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-valorant">400 FPS</div>
+            <div class="fps-value" id="fps-valorant">180 FPS</div>
           </div>
         </div>
 
@@ -326,16 +315,8 @@
             <label>Detaily: <span class="value-badge" id="det-label-cyberpunk">Low</span></label>
             <input type="range" id="det-cyberpunk" min="0" max="3" value="0">
           </div>
-          <div class="control-group">
-            <label>Ray Tracing: <span class="value-badge" id="rt-label-cyberpunk">Vypnuto</span></label>
-            <input type="range" id="rt-cyberpunk" min="0" max="1" value="0">
-          </div>
-          <div class="control-group">
-            <label>DLSS: <span class="value-badge" id="dlss-label-cyberpunk">Vypnuto</span></label>
-            <input type="range" id="dlss-cyberpunk" min="0" max="3" value="0">
-          </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-cyberpunk">100 FPS</div>
+            <div class="fps-value" id="fps-cyberpunk">35 FPS</div>
           </div>
         </div>
 
@@ -351,7 +332,7 @@
             <input type="range" id="det-gtav" min="0" max="3" value="0">
           </div>
           <div class="fps-box">
-            <div class="fps-value" id="fps-gtav">160 FPS</div>
+            <div class="fps-value" id="fps-gtav">90 FPS</div>
           </div>
         </div>
 
@@ -362,32 +343,22 @@
 
   <script>
     const baseFPS = {
-      fortnite: 240,
-      cs2: 350,
-      valorant: 400,
-      cyberpunk: 100,
-      gtav: 160
+      fortnite: 120,
+      cs2: 140,
+      valorant: 180,
+      cyberpunk: 35,
+      gtav: 90
     };
 
-    const resMultipliers = [1.0, 0.72, 0.45];
+    const resMultipliers = [1.0, 0.68, 0.40];
     const resNames = ["FHD (1080p)", "2K (1440p)", "4K (2160p)"];
 
-    const detMultipliers = [1.0, 0.80, 0.62, 0.48];
+    const detMultipliers = [1.0, 0.82, 0.65, 0.48];
     const detNames = ["Low", "Medium", "High", "Ultra"];
-
-    // Nové násobiče pro Ray Tracing
-    const rtMultipliers = [1.0, 0.55]; // Zapnuté RT srazí výkon skoro na polovinu
-    const rtNames = ["Vypnuto", "Zapnuto"];
-
-    // Nové násobiče pro DLSS
-    const dlssMultipliers = [1.0, 1.25, 1.45, 1.70]; // Zvýšení výkonu díky DLSS
-    const dlssNames = ["Vypnuto", "Quality", "Balanced", "Performance"];
 
     function recalculate(game) {
       const resInput = document.getElementById('res-' + game);
       const detInput = document.getElementById('det-' + game);
-      const rtInput = document.getElementById('rt-' + game);
-      const dlssInput = document.getElementById('dlss-' + game);
       
       if (!resInput || !detInput) return;
 
@@ -397,40 +368,18 @@
       document.getElementById('res-label-' + game).innerText = resNames[resVal];
       document.getElementById('det-label-' + game).innerText = detNames[detVal];
 
-      // RT logika (pokud hra nemá posuvník, násobí se 1x - nic se nezmění)
-      let rtMult = 1.0;
-      if (rtInput) {
-        const rtVal = parseInt(rtInput.value);
-        document.getElementById('rt-label-' + game).innerText = rtNames[rtVal];
-        rtMult = rtMultipliers[rtVal];
-      }
-
-      // DLSS logika (pokud hra nemá posuvník, násobí se 1x)
-      let dlssMult = 1.0;
-      if (dlssInput) {
-        const dlssVal = parseInt(dlssInput.value);
-        document.getElementById('dlss-label-' + game).innerText = dlssNames[dlssVal];
-        dlssMult = dlssMultipliers[dlssVal];
-      }
-
-      // Celkový výpočet s aplikací RT i DLSS
-      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal] * rtMult * dlssMult);
+      const calculated = Math.round(baseFPS[game] * resMultipliers[resVal] * detMultipliers[detVal]);
       
       document.getElementById('fps-' + game).innerText = calculated + " FPS";
     }
 
     const games = ['fortnite', 'cs2', 'valorant', 'cyberpunk', 'gtav'];
-    
     games.forEach(game => {
       const resInput = document.getElementById('res-' + game);
       const detInput = document.getElementById('det-' + game);
-      const rtInput = document.getElementById('rt-' + game);
-      const dlssInput = document.getElementById('dlss-' + game);
 
       if (resInput) resInput.addEventListener('input', () => recalculate(game));
       if (detInput) detInput.addEventListener('input', () => recalculate(game));
-      if (rtInput) rtInput.addEventListener('input', () => recalculate(game));
-      if (dlssInput) dlssInput.addEventListener('input', () => recalculate(game));
 
       recalculate(game);
     });
